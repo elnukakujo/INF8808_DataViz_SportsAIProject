@@ -1,2 +1,6 @@
 pandas
 openpyxl
+plotly
+nbformat
+numpy
+firefox
