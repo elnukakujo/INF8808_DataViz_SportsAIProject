@@ -19,11 +19,11 @@ from dash.dependencies import Input, Output, State
 app = dash.Dash(__name__)
 app.title = 'SportsAI Project'
 
-import template
-import preprocess
-import make_viz
+import Noe.template as template
+import Noe.preprocess as preprocess
+import Noe.make_viz as make_viz
 import plotly.io as pio
-import hovertemplate as hover
+import Noe.hovertemplate as hover
 
 data = preprocess.preprocess()
 
