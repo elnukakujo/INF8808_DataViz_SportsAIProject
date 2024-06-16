@@ -45,13 +45,13 @@ html_content = f'''
     
     <div class="viz-container">
         <div class="graph">
-            {fig1}
+            {dcc.Graph(figure=fig1, id='fig1')}
         </div>
     </div>
 
     <div class="viz-container">
         <div class="graph">
-            {fig2}
+            {dcc.Graph(figure=fig2, id='fig2')}
         </div>
     </div>
 
