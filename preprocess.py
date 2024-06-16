@@ -4,7 +4,7 @@
 
 import pandas as pd
 
-def get_match_df(sheet_name, columns):
+def get_match_df():
     '''
         Returns the dataframe from the Match information sheet with only the wanted columns
 
@@ -14,12 +14,16 @@ def get_match_df(sheet_name, columns):
         Returns:
             The dataframe from the Match information sheet with only the wanted columns
 
-    '''
-    match_infos = pd.read_excel('EURO_2020_DATA.xlsx', sheet_name=sheet_name)
+    '''    
+    match_infos = pd.read_excel('assets/data/EURO_2020_DATA.xlsx', sheet_name='Match information')
+    
+    columns=['MatchID','HomeTeamName','AwayTeamName', 'RoundName','ScoreHome','ScoreAway']
     return match_infos.loc[:,columns].sort_values('MatchID').set_index(['MatchID']) #Takes only the columns we want, sort them by MatchID and put it as index
 
-def get_stats_df(sheet_name, columns):
-    match_stats = pd.read_excel('EURO_2020_DATA.xlsx', sheet_name=sheet_name)
+def get_stats_df():
+    match_stats = pd.read_excel('assets/data/EURO_2020_DATA.xlsx', sheet_name='Match Stats')
+    
+    columns=['MatchID','StatsName', 'Value']
     stats_df = match_stats.loc[:,columns][(match_stats['StatsName'] == 'Fouls committed')|(match_stats['StatsName'] == 'Goals scored')|(match_stats['StatsName'] == 'Goals scored in open play')]
     
     #There is holes in the data for some StatsName, we set it at 0 since we need to convert the element as int
@@ -29,9 +33,9 @@ def get_stats_df(sheet_name, columns):
     stats_df.loc[len(stats_df.index)] = [2024469, 'Goals scored in open play', 0]
     return stats_df.sort_values('MatchID').set_index(['MatchID']) #Sort the columns by MatchID and put it as index
 
-def get_df(sheet_names, columns):
-    match_df=get_match_df(sheet_names[0], columns[sheet_names[0]])
-    stats_df=get_stats_df(sheet_names[1], columns[sheet_names[1]])
+def get_df():
+    match_df=get_match_df()
+    stats_df=get_stats_df()
     stats_df=stats_df.groupby(by=['MatchID','StatsName'])['Value'].apply(list).reset_index()
     
     match_df['FoulsCommitted']=stats_df.loc[stats_df['StatsName']=='Fouls committed']['Value'].tolist() # We add the FoolsCommitted in the match_df
@@ -46,8 +50,8 @@ def get_df(sheet_names, columns):
     match_df=match_df.reset_index(drop=True)
     return match_df
 
-def preprocess(sheet_names, columns):
-    df = get_df(sheet_names, columns)
+def preprocess():
+    df = get_df()
     
     df['MatchName']=df['HomeTeamName']+' vs '+df['AwayTeamName']
     df= df.drop(['AwayTeamName'], axis=1)

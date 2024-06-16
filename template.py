@@ -20,7 +20,6 @@ THEME = {
     'label_background_color': '#ffffff'
 }
 
-
 def create_template():
     '''
         Adds a new layout template to pio's templates.

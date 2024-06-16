@@ -1,0 +1,194 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SportsAI Project</title>
+    <!-- Include any CSS files or styles here -->
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+Div([H1('SportsAI Project'), Div(children=[Graph(id='scatter-plot', className='graph', config={'scrollZoom': False, 'showTips': False, 'showAxisDragHandles': False, 'doubleClick': False, 'displayModeBar': False}, figure=Figure({
+    'data': [{'customdata': [['Eighth Finals', 'England vs Germany'], ['Eighth
+                             Finals', 'Sweden vs Ukraine'], ['Eighth Finals',
+                             'Croatia vs Spain'], ['Eighth Finals', 'France vs
+                             Switzerland'], ['Eighth Finals', 'Netherlands vs Czech
+                             Republic'], ['Eighth Finals', 'Belgium vs Portugal'],
+                             ['Eighth Finals', 'Wales vs Denmark'], ['Eighth
+                             Finals', 'Italy vs Austria']],
+              'hovertemplate': ('<b>Match:</b> %{customdata[1]}' ... 's:</b> %{y}<br><extra></extra>'),
+              'marker': {'color': 'green', 'size': 12},
+              'mode': 'markers',
+              'name': 'Eighth Finals',
+              'type': 'scatter',
+              'x': array([2, 3, 8, 6, 2, 1, 4, 3]),
+              'y': array([20, 18, 36, 27, 20, 23, 20, 32])},
+             {'customdata': [['Final', 'Italy vs England']],
+              'hovertemplate': ('<b>Match:</b> %{customdata[1]}' ... 's:</b> %{y}<br><extra></extra>'),
+              'marker': {'color': 'purple', 'size': 12},
+              'mode': 'markers',
+              'name': 'Final',
+              'type': 'scatter',
+              'x': array([2]),
+              'y': array([34])},
+             {'customdata': [['Final Tournament', 'Hungary vs France'], ['Final
+                             Tournament', 'Switzerland vs Turkey'], ['Final
+                             Tournament', 'Italy vs Wales'], ['Final Tournament',
+                             'Russia vs Denmark'], ['Final Tournament', 'Finland vs
+                             Belgium'], ['Final Tournament', 'Germany vs Hungary'],
+                             ['Final Tournament', 'Croatia vs Scotland'], ['Final
+                             Tournament', 'Slovakia vs Spain'], ['Final
+                             Tournament', 'Sweden vs Poland'], ['Final Tournament',
+                             'Sweden vs Slovakia'], ['Final Tournament', 'Portugal
+                             vs France'], ['Final Tournament', 'Czech Republic vs
+                             England'], ['Final Tournament', 'Spain vs Poland'],
+                             ['Final Tournament', 'Netherlands vs Ukraine'],
+                             ['Final Tournament', 'England vs Scotland'], ['Final
+                             Tournament', 'Austria vs North Macedonia'], ['Final
+                             Tournament', 'Netherlands vs Austria'], ['Final
+                             Tournament', 'Ukraine vs North Macedonia'], ['Final
+                             Tournament', 'North Macedonia vs Netherlands'],
+                             ['Final Tournament', 'Ukraine vs Austria'], ['Final
+                             Tournament', 'Turkey vs Italy'], ['Final Tournament',
+                             'Wales vs Switzerland'], ['Final Tournament', 'Croatia
+                             vs Czech Republic'], ['Final Tournament', 'Belgium vs
+                             Russia'], ['Final Tournament', 'England vs Croatia'],
+                             ['Final Tournament', 'Denmark vs Finland'], ['Final
+                             Tournament', 'Spain vs Sweden'], ['Final Tournament',
+                             'Poland vs Slovakia'], ['Final Tournament', 'Hungary
+                             vs Portugal'], ['Final Tournament', 'France vs
+                             Germany'], ['Final Tournament', 'Turkey vs Wales'],
+                             ['Final Tournament', 'Italy vs Switzerland'], ['Final
+                             Tournament', 'Denmark vs Belgium'], ['Final
+                             Tournament', 'Finland vs Russia'], ['Final
+                             Tournament', 'Scotland vs Czech Republic'], ['Final
+                             Tournament', 'Portugal vs Germany']],
+              'hovertemplate': ('<b>Match:</b> %{customdata[1]}' ... 's:</b> %{y}<br><extra></extra>'),
+              'marker': {'color': 'blue', 'size': 12},
+              'mode': 'markers',
+              'name': 'Final Tournament',
+              'type': 'scatter',
+              'x': array([2, 4, 1, 5, 2, 4, 4, 5, 5, 1, 4, 1, 2, 5, 0, 4, 2, 3, 3, 1, 3, 2, 2, 3,
+                          1, 1, 0, 3, 3, 1, 2, 3, 3, 1, 2, 6]),
+              'y': array([32, 34, 26,  0, 16, 18, 18, 21, 26, 23, 24, 21, 34, 16, 27, 29, 22, 18,
+                          21, 21, 18, 15, 19, 20, 19, 23, 18, 28, 25, 17, 26, 22, 22, 24, 12, 20])},
+             {'customdata': [['Quarter Finals', 'Switzerland vs Spain'], ['Quarter
+                             Finals', 'Belgium vs Italy'], ['Quarter Finals',
+                             'Ukraine vs England'], ['Quarter Finals', 'Czech
+                             Republic vs Denmark']],
+              'hovertemplate': ('<b>Match:</b> %{customdata[1]}' ... 's:</b> %{y}<br><extra></extra>'),
+              'marker': {'color': 'orange', 'size': 12},
+              'mode': 'markers',
+              'name': 'Quarter Finals',
+              'type': 'scatter',
+              'x': array([2, 3, 4, 3]),
+              'y': array([29, 29, 14, 19])},
+             {'customdata': [['Semi Finals', 'England vs Denmark'], ['Semi
+                             Finals', 'Italy vs Spain']],
+              'hovertemplate': ('<b>Match:</b> %{customdata[1]}' ... 's:</b> %{y}<br><extra></extra>'),
+              'marker': {'color': 'red', 'size': 12},
+              'mode': 'markers',
+              'name': 'Semi Finals',
+              'type': 'scatter',
+              'x': array([3, 2]),
+              'y': array([31, 35])}],
+    'layout': {'legend': {'title': {'text': 'Rounds'}},
+               'showlegend': True,
+               'template': '...',
+               'title': {'text': 'Total Scores vs Total Fouls for Euro 2020 Matches'},
+               'xaxis': {'range': [-1, 9], 'title': {'text': 'Total Scores'}},
+               'yaxis': {'range': [-1, 39], 'title': {'text': 'Total Fouls'}}}
+}))], className='viz-container'), Div(children=[Graph(id='stacked-bar', className='graph', config={'scrollZoom': False, 'showTips': False, 'showAxisDragHandles': False, 'doubleClick': False, 'displayModeBar': False}, figure=Figure({
+    'data': [{'customdata': array(['Eighth Finals', 'Eighth Finals', 'Final Tournament',
+                                   'Final Tournament', 'Final Tournament', 'Quarter Finals',
+                                   'Eighth Finals', 'Final Tournament', 'Final Tournament',
+                                   'Final Tournament', 'Final Tournament', 'Final Tournament',
+                                   'Final Tournament', 'Quarter Finals', 'Eighth Finals',
+                                   'Final Tournament', 'Final Tournament', 'Eighth Finals',
+                                   'Quarter Finals', 'Final Tournament', 'Final Tournament',
+                                   'Final Tournament', 'Final Tournament', 'Final Tournament',
+                                   'Final Tournament', 'Eighth Finals', 'Semi Finals', 'Semi Finals',
+                                   'Eighth Finals', 'Final Tournament', 'Final Tournament', 'Final',
+                                   'Final Tournament', 'Final Tournament', 'Final Tournament',
+                                   'Final Tournament', 'Final Tournament', 'Final Tournament',
+                                   'Final Tournament', 'Quarter Finals', 'Final Tournament',
+                                   'Final Tournament', 'Final Tournament', 'Eighth Finals',
+                                   'Final Tournament', 'Final Tournament', 'Final Tournament',
+                                   'Final Tournament', 'Final Tournament', 'Final Tournament',
+                                   'Final Tournament'], dtype=object),
+              'hovertemplate': ('<b>Match Teams :</b> %{y}<br><' ... ' Play:</b> %{x}<extra></extra>'),
+              'name': 'Goals Open Play',
+              'orientation': 'h',
+              'type': 'bar',
+              'x': array([7, 6, 5, 5, 4, 4, 4, 1, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 2, 3, 3, 2, 3, 1,
+                          2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 1, 2, 2, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0,
+                          0, 0, 0]),
+              'y': array(['Croatia vs Spain', 'France vs Switzerland', 'Netherlands vs Ukraine',
+                          'Sweden vs Poland', 'Austria vs North Macedonia', 'Ukraine vs England',
+                          'Wales vs Denmark', 'Portugal vs France', 'Germany vs Hungary',
+                          'Croatia vs Scotland', 'Switzerland vs Turkey', 'Portugal vs Germany',
+                          'Belgium vs Russia', 'Czech Republic vs Denmark', 'Italy vs Austria',
+                          'North Macedonia vs Netherlands', 'Ukraine vs North Macedonia',
+                          'Sweden vs Ukraine', 'Belgium vs Italy', 'Denmark vs Belgium',
+                          'Italy vs Switzerland', 'Hungary vs Portugal', 'Slovakia vs Spain',
+                          'Netherlands vs Austria', 'Poland vs Slovakia', 'England vs Germany',
+                          'Italy vs Spain', 'England vs Denmark', 'Netherlands vs Czech Republic',
+                          'Turkey vs Italy', 'Wales vs Switzerland', 'Italy vs England',
+                          'Hungary vs France', 'Turkey vs Wales', 'Croatia vs Czech Republic',
+                          'Spain vs Poland', 'Scotland vs Czech Republic', 'Denmark vs Finland',
+                          'Finland vs Russia', 'Switzerland vs Spain', 'Sweden vs Slovakia',
+                          'Czech Republic vs England', 'England vs Croatia',
+                          'Belgium vs Portugal', 'Ukraine vs Austria', 'Italy vs Wales',
+                          'Finland vs Belgium', 'England vs Scotland', 'Russia vs Denmark',
+                          'France vs Germany', 'Spain vs Sweden'], dtype=object)},
+             {'customdata': array(['Eighth Finals', 'Eighth Finals', 'Final Tournament',
+                                   'Final Tournament', 'Final Tournament', 'Quarter Finals',
+                                   'Eighth Finals', 'Final Tournament', 'Final Tournament',
+                                   'Final Tournament', 'Final Tournament', 'Final Tournament',
+                                   'Final Tournament', 'Quarter Finals', 'Eighth Finals',
+                                   'Final Tournament', 'Final Tournament', 'Eighth Finals',
+                                   'Quarter Finals', 'Final Tournament', 'Final Tournament',
+                                   'Final Tournament', 'Final Tournament', 'Final Tournament',
+                                   'Final Tournament', 'Eighth Finals', 'Semi Finals', 'Semi Finals',
+                                   'Eighth Finals', 'Final Tournament', 'Final Tournament', 'Final',
+                                   'Final Tournament', 'Final Tournament', 'Final Tournament',
+                                   'Final Tournament', 'Final Tournament', 'Final Tournament',
+                                   'Final Tournament', 'Quarter Finals', 'Final Tournament',
+                                   'Final Tournament', 'Final Tournament', 'Eighth Finals',
+                                   'Final Tournament', 'Final Tournament', 'Final Tournament',
+                                   'Final Tournament', 'Final Tournament', 'Final Tournament',
+                                   'Final Tournament'], dtype=object),
+              'hovertemplate': ('<b>Match Teams :</b> %{y}<br><' ... 'ieces:</b> %{x}<extra></extra>'),
+              'name': 'Goals Set Pieces',
+              'orientation': 'h',
+              'type': 'bar',
+              'x': array([0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1,
+                          0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0,
+                          0, 0, 0]),
+              'y': array(['Croatia vs Spain', 'France vs Switzerland', 'Netherlands vs Ukraine',
+                          'Sweden vs Poland', 'Austria vs North Macedonia', 'Ukraine vs England',
+                          'Wales vs Denmark', 'Portugal vs France', 'Germany vs Hungary',
+                          'Croatia vs Scotland', 'Switzerland vs Turkey', 'Portugal vs Germany',
+                          'Belgium vs Russia', 'Czech Republic vs Denmark', 'Italy vs Austria',
+                          'North Macedonia vs Netherlands', 'Ukraine vs North Macedonia',
+                          'Sweden vs Ukraine', 'Belgium vs Italy', 'Denmark vs Belgium',
+                          'Italy vs Switzerland', 'Hungary vs Portugal', 'Slovakia vs Spain',
+                          'Netherlands vs Austria', 'Poland vs Slovakia', 'England vs Germany',
+                          'Italy vs Spain', 'England vs Denmark', 'Netherlands vs Czech Republic',
+                          'Turkey vs Italy', 'Wales vs Switzerland', 'Italy vs England',
+                          'Hungary vs France', 'Turkey vs Wales', 'Croatia vs Czech Republic',
+                          'Spain vs Poland', 'Scotland vs Czech Republic', 'Denmark vs Finland',
+                          'Finland vs Russia', 'Switzerland vs Spain', 'Sweden vs Slovakia',
+                          'Czech Republic vs England', 'England vs Croatia',
+                          'Belgium vs Portugal', 'Ukraine vs Austria', 'Italy vs Wales',
+                          'Finland vs Belgium', 'England vs Scotland', 'Russia vs Denmark',
+                          'France vs Germany', 'Spain vs Sweden'], dtype=object)}],
+    'layout': {'barmode': 'stack',
+               'height': 1000,
+               'legend': {'title': {'text': 'Types of Goals'}},
+               'template': '...',
+               'title': {'text': 'Goals by Match (Horizontal Bar Chart)'},
+               'xaxis': {'range': [0, 8], 'title': {'text': 'Number of Goals'}},
+               'yaxis': {'autorange': 'reversed', 'title': {'text': 'Match'}}}
+}))], className='viz-container')])
+</body>
+</html>
