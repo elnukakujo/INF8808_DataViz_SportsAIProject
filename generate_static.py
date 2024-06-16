@@ -18,13 +18,27 @@ fig1 = make_viz.create_scatter(data, hover.get_scatter_hover_template())
 fig2 = make_viz.create_stacked_bars(data, hover.get_stacked_bar_hover_template)
 
 # Define HTML for components
-html_content = '''
+html_content = f'''
 <!DOCTYPE html>
 <html>
 <head>
     <title>SportsAI Project</title>
-    <!-- Include any CSS files or styles here -->
+    <!-- Link to your CSS file -->
     <link rel="stylesheet" href="assets/style.css">
+    <style>
+        /* Inline styles if necessary */
+        .viz-container {{
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 100px;
+        }}
+
+        .graph {{
+            height: 800px;
+        }}
+    </style>
 </head>
 <body>
     <h1>SportsAI Project</h1>
@@ -44,7 +58,7 @@ html_content = '''
     <!-- Include any JavaScript files here if needed -->
 </body>
 </html>
-'''.format(fig1=fig1.to_html(), fig2=fig2.to_html())
+'''
 
 # Save the static HTML
 with open("index.html", "w") as file:
