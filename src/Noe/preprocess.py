@@ -8,9 +8,6 @@ def get_match_df():
     '''
         Returns the dataframe from the Match information sheet with only the wanted columns
 
-        Args:
-            sheet_name: The name of the sheet we want in the excel table
-            street_df: The name of the columns we want in this sheet
         Returns:
             The dataframe from the Match information sheet with only the wanted columns
 

@@ -14,23 +14,28 @@
 import dash
 import dash_html_components as html
 import dash_core_components as dcc
-from dash.dependencies import Input, Output, State
 
 app = dash.Dash(__name__)
 app.title = 'SportsAI Project'
 
-import Noe.template as template
-import Noe.preprocess as preprocess
-import Noe.make_viz as make_viz
+import Noe.preprocess as noe_preprocess
+import Noe.make_viz as noe_make_viz
 import plotly.io as pio
-import Noe.hovertemplate as hover
+import Noe.hovertemplate as noe_hover
 
-data = preprocess.preprocess()
+data = noe_preprocess.preprocess()
 
 pio.templates.default = 'simple_white'
 
-fig1 = make_viz.create_scatter(data, hover.get_scatter_hover_template())
-fig2 = make_viz.create_stacked_bars(data, hover.get_stacked_bar_hover_template)
+fig1 = noe_make_viz.create_scatter(data, noe_hover.get_scatter_hover_template())
+fig2 = noe_make_viz.create_stacked_bars(data, noe_hover.get_stacked_bar_hover_template)
+
+import Abdel.preprocess as abdel_preprocess
+import Abdel.make_viz as abdel_makeviz
+
+df1, df2 = abdel_preprocess.get_df()
+
+fig3,fig4 = abdel_makeviz.create_bars(df1, df2)
 
 app.layout = html.Div([
     html.H1('SportsAI Project'),
@@ -60,6 +65,34 @@ app.layout = html.Div([
                     ),
                     className='graph',
                     id='stacked-bar'
+                )
+    ]),
+    html.Div(className='viz-container', children=[
+        dcc.Graph(
+                    figure=fig3,
+                    config=dict(
+                        scrollZoom=False,
+                        showTips=False,
+                        showAxisDragHandles=False,
+                        doubleClick=False,
+                        displayModeBar=False
+                    ),
+                    className='graph',
+                    id='bar1'
+                )
+    ]),
+    html.Div(className='viz-container', children=[
+        dcc.Graph(
+                    figure=fig4,
+                    config=dict(
+                        scrollZoom=False,
+                        showTips=False,
+                        showAxisDragHandles=False,
+                        doubleClick=False,
+                        displayModeBar=False
+                    ),
+                    className='graph',
+                    id='bar2'
                 )
     ])
 ])
