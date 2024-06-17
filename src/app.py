@@ -107,43 +107,49 @@ app.layout = html.Div([
                     id='bar2'
                 )
     ]),
-    html.Div(className='viz-container', id='pie-charts', children=[
-        dcc.Graph(
-                    figure=fig5,
-                    config=dict(
-                        scrollZoom=False,
-                        showTips=False,
-                        showAxisDragHandles=False,
-                        doubleClick=False,
-                        displayModeBar=False
+    html.Div(id='pie-charts', children=[
+        html.Div(className='viz-container', children=[
+            dcc.Graph(
+                        figure=fig5,
+                        config=dict(
+                            scrollZoom=False,
+                            showTips=False,
+                            showAxisDragHandles=False,
+                            doubleClick=False,
+                            displayModeBar=False
+                        ),
+                        className='graph',
+                        id='pie1'
                     ),
-                    className='graph',
-                    id='pie1'
-                ),
-        dcc.Graph(
-                    figure=fig6,
-                    config=dict(
-                        scrollZoom=False,
-                        showTips=False,
-                        showAxisDragHandles=False,
-                        doubleClick=False,
-                        displayModeBar=False
+        ]),
+        html.Div(className='viz-container', children=[
+            dcc.Graph(
+                        figure=fig6,
+                        config=dict(
+                            scrollZoom=False,
+                            showTips=False,
+                            showAxisDragHandles=False,
+                            doubleClick=False,
+                            displayModeBar=False
+                        ),
+                        className='graph',
+                        id='pie2'
                     ),
-                    className='graph',
-                    id='pie2'
-                ),
-        dcc.Graph(
-                    figure=fig7,
-                    config=dict(
-                        scrollZoom=False,
-                        showTips=False,
-                        showAxisDragHandles=False,
-                        doubleClick=False,
-                        displayModeBar=False
-                    ),
-                    className='graph',
-                    id='pie3'
-                )
+        ]),
+        html.Div(className='viz-container', children=[
+            dcc.Graph(
+                        figure=fig7,
+                        config=dict(
+                            scrollZoom=False,
+                            showTips=False,
+                            showAxisDragHandles=False,
+                            doubleClick=False,
+                            displayModeBar=False
+                        ),
+                        className='graph',
+                        id='pie3'
+                    )
+        ])
     ])
 ])
 server = app.server

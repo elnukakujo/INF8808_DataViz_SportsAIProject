@@ -10,9 +10,15 @@
     height: 800px;
 }
 
-#pie-charts .graph {
-    height: 300px;
-    width: 300px;
+#pie-charts .viz-container {
+    height: 600px;
+    width: 450px;
     display: inline-block;
     vertical-align: top;
+    padding: 0px;
+}
+
+#pie-charts .viz-container .graph{
+    width: 450px;
+    scale: 0.8;
 }
