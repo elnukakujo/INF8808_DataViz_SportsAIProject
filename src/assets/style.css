@@ -1,5 +1,5 @@
 .viz-container{
-    height: 100%;
+    height: 800px;
     flex-direction: column;
     display: flex;
     justify-content: center;
@@ -8,4 +8,11 @@
 
 .graph {
     height: 800px;
+}
+
+#pie-charts .graph {
+    height: 300px;
+    width: 300px;
+    display: inline-block;
+    vertical-align: top;
 }

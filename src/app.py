@@ -40,10 +40,14 @@ fig2 = noe_make_viz.create_stacked_bars(data, noe_hover.get_stacked_bar_hover_te
 import Abdel.preprocess as abdel_preprocess
 import Abdel.make_viz as abdel_makeviz
 
-df1, df2 = abdel_preprocess.get_df(player_stats, line_ups)
-
+df1, df2 = abdel_preprocess.preprocess(player_stats, line_ups)
 fig3,fig4 = abdel_makeviz.create_bars(df1, df2)
 
+import Amadeus.preprocess as amadeus_preprocess
+import Amadeus.make_viz as amadeus_makeviz
+
+df1, df2, df3 = amadeus_preprocess.preprocess(player_stats, line_ups)
+fig5,fig6,fig7 = amadeus_makeviz.draw(df1, df2, df3)
 
 app.layout = html.Div([
     html.H1('SportsAI Project'),
@@ -101,6 +105,44 @@ app.layout = html.Div([
                     ),
                     className='graph',
                     id='bar2'
+                )
+    ]),
+    html.Div(className='viz-container', id='pie-charts', children=[
+        dcc.Graph(
+                    figure=fig5,
+                    config=dict(
+                        scrollZoom=False,
+                        showTips=False,
+                        showAxisDragHandles=False,
+                        doubleClick=False,
+                        displayModeBar=False
+                    ),
+                    className='graph',
+                    id='pie1'
+                ),
+        dcc.Graph(
+                    figure=fig6,
+                    config=dict(
+                        scrollZoom=False,
+                        showTips=False,
+                        showAxisDragHandles=False,
+                        doubleClick=False,
+                        displayModeBar=False
+                    ),
+                    className='graph',
+                    id='pie2'
+                ),
+        dcc.Graph(
+                    figure=fig7,
+                    config=dict(
+                        scrollZoom=False,
+                        showTips=False,
+                        showAxisDragHandles=False,
+                        doubleClick=False,
+                        displayModeBar=False
+                    ),
+                    className='graph',
+                    id='pie3'
                 )
     ])
 ])

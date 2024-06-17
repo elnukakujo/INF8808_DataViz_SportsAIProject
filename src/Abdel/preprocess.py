@@ -1,6 +1,6 @@
 import pandas as pd
 
-def get_df(player_stats, line_ups):
+def preprocess(player_stats, line_ups):
     # Rename the column 'ID' to 'PlayerID'
     line_ups.rename(columns={'ID': 'PlayerID'}, inplace=True)
 
