@@ -32,9 +32,6 @@ def create_template():
         as the theme's overall font color. The hover mode
         is set to 'closest'.
 
-        Also sets the colors for the pie slices
-        to those defined in the THEME dictionary.
-
     '''
     pio.templates['pietemplate'] = go.layout.Template(
         layout=go.Layout(
