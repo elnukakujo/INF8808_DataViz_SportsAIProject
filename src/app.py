@@ -51,24 +51,21 @@ fig5,fig6,fig7 = amadeus_makeviz.draw(df1, df2, df3)
 
 app.layout = html.Div([
     html.Div(className='anchor',id='0'),
-    html.Nav([
+    html.Div(className='intro',children=[
+        html.H2(html.A('SportsAI', href='#0')),
         html.Ul([
-            html.Li(html.A('SportsAI', href='#0')),
-            html.Li([
+            html.H3([
                 'Visualizations',
                 html.Ul([
-                    html.Li(html.A('Scatter Plot', href='#1')),
-                    html.Li(html.A('Stacked Bar', href='#2')),
-                    html.Li(html.A('Bar 1', href='#3')),
-                    html.Li(html.A('Bar 2', href='#4')),
-                    html.Li(html.A('Pie Chart', href='#5')),
+                    html.Li(html.A('Total Scores vs Total Fouls for Euro 2020 Matches', href='#1')),
+                    html.Li(html.A('Goals by Match', href='#2')),
+                    html.Li(html.A('Values of Recovered balls, Distance covered, Tackles won and Fouls by Player Position', href='#3')),
+                    html.Li(html.A('Number of Goals by Foot and Position', href='#4')),
+                    html.Li(html.A('Pie Charts', href='#5')),
                 ], className='dropdown-content')
             ], className='dropdown')
-        ])
-    ], className='navbar'),
-    html.Div(className='intro',children=[
-        html.H1('SportsAI'),
-        html.H2('Boost your Performance with Data'),
+        ]),
+        html.H1('Boost your Performance with Data'),
     ]),
     html.Div(className='anchor',id='1'),
     html.Div(className='viz-container', children=[

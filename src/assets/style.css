@@ -31,15 +31,27 @@
     background-position: center;
     background-size: cover;
     color: azure;
+    z-index: 2;
+}
+
+.intro h2 a{
+    font-size: 60px;
+    letter-spacing: 2px;
+    text-decoration: none;
+    color: white;
+}
+
+.intro h2 a:hover{
+    color: gray;
 }
 
 .intro h1{
     font-size: 100px;
-    margin: 100px 0px;
+    letter-spacing: 3px;
 }
 
-.intro h2{
-    font-size: 60px;
+.intro h3{
+    font-size: 40px;
 }
 
 .anchor {
@@ -47,38 +59,8 @@
     margin: -150px;
 }
 
-.navbar {
-    background-color: #333;
-    overflow: visible;  /* Ensure the dropdown can overflow */
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-}
-
-.navbar ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-
-.navbar li {
-    float: left;
-    display: inline;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    position: relative;  /* For the dropdown */
-}
-
-.navbar li:hover {
-    background-color: #111;
-}
-
 .dropdown {
     position: relative;
-    display: inline-block;
 }
 
 .dropdown-content {
@@ -87,12 +69,10 @@
     background-color: #f9f9f9;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1000;
-    top: 100%;  /* Align dropdown below the nav item */
-    left: 0;
+    z-index: 1001; /* Ensure dropdown is above navbar */
 }
 
-.dropdown-content li {
+.dropdown-content a {
     color: black;
     padding: 12px 16px;
     text-decoration: none;
@@ -100,14 +80,10 @@
     text-align: left;
 }
 
-.dropdown-content li:hover {
+.dropdown-content a:hover {
     background-color: #f1f1f1;
 }
 
 .dropdown:hover .dropdown-content {
     display: block;
-}
-
-body {
-    padding-top: 60px;  /* Adjust based on navbar height */
 }
