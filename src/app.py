@@ -15,32 +15,21 @@ import dash
 import dash_html_components as html
 import dash_core_components as dcc
 import plotly.io as pio
-import pandas as pd
 
 app = dash.Dash(__name__)
 app.title = 'SportsAI Project'
 
 import get_df
+match_infos = get_df.get_df('Match_information')
+match_stats = get_df.get_df('Match_Stats')
+player_stats = get_df.get_df('Players_stats')
+line_ups= get_df.get_df('Line-ups')
+
+pio.templates.default = 'simple_white'
 
 import Noe.preprocess as noe_preprocess
 import Noe.make_viz as noe_make_viz
 import Noe.hovertemplate as noe_hover
-
-# csv approach
-match_infos = pd.read_csv("./assets/data/EURO_2020_DATA_Match_information.csv") #get_df.get_df('Match information')
-match_stats = pd.read_csv("./assets/data/EURO_2020_DATA_Match_Stats.csv") #get_df.get_df('Match Stats')
-player_stats = pd.read_csv("./assets/data/EURO_2020_DATA_Players_stats.csv") #get_df.get_df('Player Stats')
-line_ups= pd.read_csv("./assets/data/EURO_2020_DATA_Line-ups.csv") #get_df.get_df('Line-ups')
-# 2.73 seconds deployment time reading csv files
-
-# excel approach
-#match_infos = get_df.get_df('Match information')
-#match_stats = get_df.get_df('Match Stats')
-#player_stats = get_df.get_df('Players stats')
-#line_ups= get_df.get_df('Line-ups')
-# 34.5 seconds deployment time reading excel files
-
-pio.templates.default = 'simple_white'
 
 data = noe_preprocess.preprocess(match_infos, match_stats)
 
@@ -62,22 +51,24 @@ fig5,fig6,fig7 = amadeus_makeviz.draw(df1, df2, df3)
 app.layout = html.Div([
     html.Div(className='anchor',id='0'),
     html.Div(className='intro',children=[
-        html.H2(html.A('SportsAI', href='#0')),
-        html.Ul([
-            html.H3([
-                'Visualizations',
-                html.Ul([
-                    html.Li(html.A('Total Scores vs Total Fouls for Euro 2020 Matches', href='#1')),
-                    html.Li(html.A('Goals by Match', href='#2')),
-                    html.Li(html.A('Values of Recovered balls, Distance covered, Tackles won and Fouls by Player Position', href='#3')),
-                    html.Li(html.A('Number of Goals by Foot and Position', href='#4')),
-                    html.Li(html.A('Pie Charts', href='#5')),
-                ], className='dropdown-content')
-            ], className='dropdown')
-        ]),
+        html.H2('SportsAI'),
         html.H1('Boost your Performance with Data'),
     ]),
     html.Div(className='anchor',id='1'),
+    html.Div(className='about_us', children=[
+        html.P(
+            "At SportsAI, we are dedicated to revolutionizing the way coaches enhance their players' "+
+            "performance through cutting-edge data visualization. Our team combines expertise in sports "+
+            "science and advanced analytics to provide insightful, actionable data that empowers coaches to "+
+            "make informed decisions. Whether it's tracking progress, identifying strengths and weaknesses, or "+ 
+            "optimizing training strategies, SportsAI is your partner in achieving peak performance. Join us and "+
+            "transform your data into a competitive edge."
+        ),
+        html.Div(className='img-container',children=[
+            html.Img(src='assets/img/aboutus.jpg', alt='A coach talking to her team'),
+            html.A('Image Source', href='https://www.dickssportinggoods.com/protips/sports-and-activities/soccer/soccer-coaching-tips-game-day-prep', target='_blank')
+        ])
+    ]),
     html.Div(className='viz-container', children=[
         dcc.Graph(
                     figure=fig1,
