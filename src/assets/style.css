@@ -2,13 +2,29 @@ body{
     background-color: rgb(236, 255, 236);
 }
 
+h1 {
+    font-size: 100px;
+}
+
+h2 {
+    font-size: 80px;
+}
+
+h3 {
+    font-size: 35px;
+}
+
+p{
+    font-size: 20px;
+}
+
+ol{
+    font-size: 20px;
+}
+
 .viz-container{
-    height: 600px;
+    height: 800px;
     width: 1000px;
-    flex-direction: column;
-    display: flex;
-    justify-content: center;
-    padding: 0 100px;
 }
 
 .graph {
@@ -33,18 +49,15 @@ body{
     background-image: url(img/soccer_fans.jpg);
     background-position: center;
     background-size: cover;
-    color: rgb(208, 252, 208);
+    color: rgba(208, 252, 208, 0.932);
     font-weight:550;
 }
 
 .intro h2{
-    font-size: 80px;
-    letter-spacing: 2px;
-    text-decoration: none;
+    letter-spacing: 10px;
 }
 
 .intro h1{
-    font-size: 100px;
     letter-spacing: 3px;
 }
 
@@ -88,4 +101,24 @@ body{
 
 .about_us .img-container img{
     width: 800px;
+}
+
+
+.match-overview {
+    padding: 30px 40px;
+}
+
+.match-overview .viz-container{
+    display: flex;
+    width: 1800px;
+}
+
+#scatter-plot{
+    left:0;
+    width: 900px;
+}
+
+#stacked-bar{
+    right:0;
+    width: 900px;
 }
