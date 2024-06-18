@@ -51,6 +51,7 @@ ol{
     background-size: cover;
     color: rgba(208, 252, 208, 0.932);
     font-weight:550;
+    box-shadow: 5px 5px 2px rgba(139, 139, 139);
 }
 
 .intro h2{
@@ -68,11 +69,12 @@ ol{
 }
 
 .about_us{
-    background-color: rgba(7, 71, 12, 0.808);
+    background-color: #658a158e;
     padding: 100px;
     display: flex;
     vertical-align: top;
     margin: 10px 0px;
+    box-shadow: 5px 5px 2px rgba(139, 139, 139);
 }
 
 .about_us p{
@@ -88,6 +90,7 @@ ol{
     width: 800px;
     padding-left: 30px;
     margin: 35px 0px;
+    
 }
 
 .about_us .img-container a{
@@ -101,11 +104,14 @@ ol{
 
 .about_us .img-container img{
     width: 800px;
+    box-shadow: 5px 5px 2px rgba(139, 139, 139);
 }
 
 
 .match-overview {
     padding: 30px 40px;
+    background-color: #3a158a98;
+    box-shadow: 5px 5px 2px rgba(139, 139, 139);
 }
 
 .match-overview .viz-container{
