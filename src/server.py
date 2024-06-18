@@ -2,7 +2,7 @@
     Contains the server to run our application.
 '''
 from flask_failsafe import failsafe
-
+import time
 
 @failsafe
 def create_app():
@@ -18,4 +18,10 @@ def create_app():
 
 
 if __name__ == "__main__":
-    create_app().run(port="8050", debug=True)
+    start_time = time.time()  # Record the start time
+    server = create_app()
+    end_time = time.time()  # Record the end time
+    elapsed_time = end_time - start_time  # Calculate the elapsed time
+    print(f"Time taken to create and run the app: {elapsed_time:.2f} seconds")
+
+    server.run(port="8050", debug=True)

@@ -27,20 +27,26 @@ def get_stats_df(stats_df):
     return stats_df.sort_values('MatchID').set_index(['MatchID']) #Sort the columns by MatchID and put it as index
 
 def get_df(match_df, stats_df):
-    match_df=get_match_df(match_df)
-    stats_df=get_stats_df(stats_df)
-    stats_df=stats_df.groupby(by=['MatchID','StatsName'])['Value'].apply(list).reset_index()
+    match_df = get_match_df(match_df)
+    stats_df = get_stats_df(stats_df)
     
-    match_df['FoulsCommitted']=stats_df.loc[stats_df['StatsName']=='Fouls committed']['Value'].tolist() # We add the FoolsCommitted in the match_df
-    match_df['TotalFouls']=match_df.FoulsCommitted.apply(lambda x: sum(x)).astype(int) #We create the TotalFools columns for the later y axis
+    # Group and convert lists
+    stats_df = stats_df.groupby(by=['MatchID', 'StatsName'])['Value'].apply(list).reset_index()
     
-    match_df['GoalsOpenPlay']=[sum(goals) for goals in stats_df.loc[stats_df['StatsName']=='Goals scored in open play']['Value']] # We sum and add the GoalsOpenPlay in the match_df
+    # Add FoulsCommitted to match_df and convert to int
+    match_df['FoulsCommitted'] = stats_df.loc[stats_df['StatsName'] == 'Fouls committed', 'Value'].tolist()
+    match_df['FoulsCommitted'] = match_df['FoulsCommitted'].apply(lambda lst: [int(x) for x in lst])
+    match_df['TotalFouls'] = match_df['FoulsCommitted'].apply(lambda x: sum(x)).astype(int)
     
-    match_df['GoalsSetPieces']=[sum(goals) for goals in stats_df.loc[stats_df['StatsName']=='Goals scored']['Value']]
-    match_df['GoalsSetPieces']=match_df['GoalsSetPieces']-match_df['GoalsOpenPlay'] 
-    # We sum and add the Goals of the matches and substract the GOalsOpenPlay to get the GoalsSetPieces in the match_df
+    # Process GoalsOpenPlay and GoalsSetPieces
+    goals_open_play = stats_df.loc[stats_df['StatsName'] == 'Goals scored in open play', 'Value']
+    match_df['GoalsOpenPlay'] = [sum([int(g) for g in goals]) for goals in goals_open_play]
     
-    match_df=match_df.reset_index(drop=True)
+    goals_scored = stats_df.loc[stats_df['StatsName'] == 'Goals scored', 'Value']
+    match_df['GoalsSetPieces'] = [sum([int(g) for g in goals]) for goals in goals_scored]
+    match_df['GoalsSetPieces'] = match_df['GoalsSetPieces'] - match_df['GoalsOpenPlay']
+    
+    match_df = match_df.reset_index(drop=True)
     return match_df
 
 def preprocess(match_df, stats_df):
