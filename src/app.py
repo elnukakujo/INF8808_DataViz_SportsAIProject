@@ -14,6 +14,7 @@
 import dash
 import dash_html_components as html
 import dash_core_components as dcc
+import plotly.io as pio
 
 app = dash.Dash(__name__)
 app.title = 'SportsAI Project'
@@ -22,7 +23,6 @@ import get_df
 
 import Noe.preprocess as noe_preprocess
 import Noe.make_viz as noe_make_viz
-import plotly.io as pio
 import Noe.hovertemplate as noe_hover
 
 match_infos = get_df.get_df('Match information')
@@ -50,10 +50,27 @@ df1, df2, df3 = amadeus_preprocess.preprocess(player_stats, line_ups)
 fig5,fig6,fig7 = amadeus_makeviz.draw(df1, df2, df3)
 
 app.layout = html.Div([
+    html.Div(className='anchor',id='0'),
+    html.Nav([
+        html.Ul([
+            html.Li(html.A('SportsAI', href='#0')),
+            html.Li([
+                'Visualizations',
+                html.Ul([
+                    html.Li(html.A('Scatter Plot', href='#1')),
+                    html.Li(html.A('Stacked Bar', href='#2')),
+                    html.Li(html.A('Bar 1', href='#3')),
+                    html.Li(html.A('Bar 2', href='#4')),
+                    html.Li(html.A('Pie Chart', href='#5')),
+                ], className='dropdown-content')
+            ], className='dropdown')
+        ])
+    ], className='navbar'),
     html.Div(className='intro',children=[
         html.H1('SportsAI'),
         html.H2('Boost your Performance with Data'),
     ]),
+    html.Div(className='anchor',id='1'),
     html.Div(className='viz-container', children=[
         dcc.Graph(
                     figure=fig1,
@@ -68,6 +85,7 @@ app.layout = html.Div([
                     id='scatter-plot'
                 )
     ]),
+    html.Div(className='anchor',id='2'),
     html.Div(className='viz-container', children=[
         dcc.Graph(
                     figure=fig2,
@@ -82,6 +100,7 @@ app.layout = html.Div([
                     id='stacked-bar'
                 )
     ]),
+    html.Div(className='anchor',id='3'),
     html.Div(className='viz-container', children=[
         dcc.Graph(
                     figure=fig3,
@@ -96,6 +115,7 @@ app.layout = html.Div([
                     id='bar1'
                 )
     ]),
+    html.Div(className='anchor',id='4'),
     html.Div(className='viz-container', children=[
         dcc.Graph(
                     figure=fig4,
@@ -110,6 +130,7 @@ app.layout = html.Div([
                     id='bar2'
                 )
     ]),
+    html.Div(className='anchor',id='5'),
     html.Div(id='pie-charts', children=[
         html.Div(className='viz-container', children=[
             dcc.Graph(
@@ -155,4 +176,5 @@ app.layout = html.Div([
         ])
     ])
 ])
+
 server = app.server
