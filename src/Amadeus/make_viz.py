@@ -19,7 +19,7 @@ def create_pie_chart(labels, values, title):
     fig.update_traces(
         textposition='inside',
         textinfo='percent+label',
-        marker=dict(colors=[role_colors[label] for label in labels])
+        marker=dict(colors=[role_colors[label] for label in labels]),
         hovertemplate='<b>%{label}</b><br>Total: %{value}<br>Percentage: %{percent:.2f}%<extra></extra>'
     )
     fig.update_layout(
