@@ -15,6 +15,7 @@ import dash
 import dash_html_components as html
 import dash_core_components as dcc
 import plotly.io as pio
+import pandas as pd
 
 app = dash.Dash(__name__)
 app.title = 'SportsAI Project'
@@ -25,10 +26,19 @@ import Noe.preprocess as noe_preprocess
 import Noe.make_viz as noe_make_viz
 import Noe.hovertemplate as noe_hover
 
-match_infos = get_df.get_df('Match information')
-match_stats = get_df.get_df('Match Stats')
-player_stats=get_df.get_df('Players stats')
-line_ups=get_df.get_df('Line-ups')
+# csv approach
+match_infos = pd.read_csv("./assets/data/EURO_2020_DATA_Match_information.csv") #get_df.get_df('Match information')
+match_stats = pd.read_csv("./assets/data/EURO_2020_DATA_Match_Stats.csv") #get_df.get_df('Match Stats')
+player_stats = pd.read_csv("./assets/data/EURO_2020_DATA_Players_stats.csv") #get_df.get_df('Player Stats')
+line_ups= pd.read_csv("./assets/data/EURO_2020_DATA_Line-ups.csv") #get_df.get_df('Line-ups')
+# 2.73 seconds deployment time reading csv files
+
+# excel approach
+#match_infos = get_df.get_df('Match information')
+#match_stats = get_df.get_df('Match Stats')
+#player_stats = get_df.get_df('Players stats')
+#line_ups= get_df.get_df('Line-ups')
+# 34.5 seconds deployment time reading excel files
 
 pio.templates.default = 'simple_white'
 
