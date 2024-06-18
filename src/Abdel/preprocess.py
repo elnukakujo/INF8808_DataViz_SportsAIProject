@@ -10,11 +10,14 @@ def preprocess(player_stats, line_ups):
     # Filter the data for relevant stats
     relevant_stats = ['Recovered balls', 'Distance covered (Km)', 'Tackles won', 'Fouls committed']
     filtered_df = merged_df[merged_df['StatsName'].isin(relevant_stats)]
+    # convert values in filtered_df to numeric
+    filtered_df['Value'] = pd.to_numeric(filtered_df['Value'], errors='raise')
     # Group by Role and StatsName and sum the Value
     df1 = filtered_df.groupby(['Role', 'StatsName'])['Value'].sum().reset_index()
     
     relevant_stats = ['Goals scored by left foot', 'Goals scored by right foot']
     filtered_df = merged_df[merged_df['StatsName'].isin(relevant_stats)]
+    filtered_df['Value'] = pd.to_numeric(filtered_df['Value'], errors='raise')
     # Group by Role and StatsName and sum the Value (goals)
     df2 = filtered_df.groupby(['Role', 'StatsName'])['Value'].sum().reset_index()
 
