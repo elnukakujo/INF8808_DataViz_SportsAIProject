@@ -50,7 +50,8 @@ df1, df2, df3 = amadeus_preprocess.preprocess(player_stats, line_ups)
 fig5,fig6,fig7 = amadeus_makeviz.draw(df1, df2, df3)
 
 app.layout = html.Div([
-    html.H1('SportsAI Project'),
+    html.H1('SportsAI'),
+    html.H2('Boost your Performance with Data'),
     html.Div(className='viz-container', children=[
         dcc.Graph(
                     figure=fig1,
