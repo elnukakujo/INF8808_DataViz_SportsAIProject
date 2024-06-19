@@ -67,8 +67,8 @@ def add_team_to_radar_chart(fig, merged_stats, second_team):
     team_stats = merged_stats[merged_stats['TeamName'] == second_team].iloc[0]
 
     categories = ['Goals Scored per Game',
-                  'Attempts % Accuracy',
-                  'Passes % Accuracy',
+                  'Attempts Accuracy',
+                  'Passes Accuracy',
                   'Fouls Commited per Game',
                   'Ball Possession % per Game']
 
