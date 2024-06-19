@@ -128,3 +128,27 @@ ol{
     right:0;
     width: 900px;
 }
+
+.radar-chart-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    background-color: rgba(184, 222, 245, 0.6);
+}
+
+.radar-chart-explanation {
+    flex: 0 0 30%;
+    padding: 10px;
+}
+
+.radar-chart-container {
+    flex: 0 0 70%;
+    padding: 10px;
+}
+
+#first-team-dropdown, #second-team-dropdown {
+    margin-bottom: 10px;
+}
+
