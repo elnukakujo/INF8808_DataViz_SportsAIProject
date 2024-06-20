@@ -98,7 +98,7 @@ app.layout = html.Div([
                 "These visualizations offer a comprehensive overview of key match statistics, enhancing the understanding " +
                 "of the factors that contribute to the dynamics of the game."
             ),
-            html.P("Try hovering hover the elements in the graph to get more details!")
+            html.P("Try hovering hover the elements in the graph and play with the legend to get more details!")
         ]),
         html.Div(className='viz-container', children=[
             dcc.Graph(
