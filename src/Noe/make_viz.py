@@ -31,17 +31,26 @@ def create_scatter(df, hovertemplate):
     # Create a figure with all traces
     fig = go.Figure(data=traces)
     fig.update_layout(
-        title='Total Scores vs Total Fouls for Euro 2020 Matches',
+        title=dict(
+            text='Total Scores vs Total Fouls for Euro 2020 Matches',
+            font_size=14    
+        ),
         xaxis_title='Total Scores',
         yaxis_title='Total Fouls',
         template="simple_white",
         showlegend=True,
         legend=dict(
-            title='Rounds',
+            title=dict(
+                text='Rounds',
+                font_size=12
+            ),
+            font_size=10,
         ),
-        xaxis=dict(range=[-1, 9]),  # Adjust range as per your data
+        xaxis=dict(range=[-1, 9]),
         yaxis=dict(range=[-1, 39])
     )
+    fig.update_xaxes(title_font_size=12)
+    fig.update_yaxes(title_font_size=12)
     return fig
 
 def create_stacked_bars(df, hovertemplate):
@@ -73,12 +82,19 @@ def create_stacked_bars(df, hovertemplate):
     fig.update_layout(
         template='simple_white',
         barmode='stack',
-        title='Goals by Match (Horizontal Bar Chart)',
+        title=dict(
+            text='Goals by Match (Horizontal Bar Chart)', 
+            font_size=14
+        ),
         xaxis_title='Number of Goals',
         yaxis_title='Match',
-        legend_title='Types of Goals',
+        legend=dict(
+            title='Types of Goals',
+            font_size=12
+        ),
         yaxis=dict(autorange="reversed"),
-        height=1000,
         xaxis=dict(range=[0, 8]),  # Adjust range as per your data
     )
+    fig.update_xaxes(title_font_size=12)
+    fig.update_yaxes(title_font_size=12)
     return fig

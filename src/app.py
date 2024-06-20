@@ -58,8 +58,8 @@ radar_data = arman_preprocess.preprocess(match_stats)
 app.layout = html.Div([
     html.Div(className='anchor', id='0'),
     html.Div(className='intro', children=[
-        html.H2('SportsAI'),
-        html.H1('Boost your Performance with Data'),
+        html.H1('SportsAI'),
+        html.H2('Boost your Players with Data'),
     ]),
     html.Div(className='anchor', id='1'),
     html.Div(className='about_us', children=[
@@ -113,6 +113,7 @@ app.layout = html.Div([
                 className='graph',
                 id='scatter-plot'
             ),
+            html.Tr(),
             dcc.Graph(
                 figure=fig2,
                 config=dict(
@@ -123,7 +124,8 @@ app.layout = html.Div([
                     displayModeBar=False
                 ),
                 className='graph',
-                id='stacked-bar'
+                id='stacked-bar',
+                style={"margin-left": "15px"}
             )
         ])
     ]),
