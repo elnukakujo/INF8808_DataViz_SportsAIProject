@@ -125,7 +125,7 @@ app.layout = html.Div([
                 ),
                 className='graph',
                 id='stacked-bar',
-                style={"margin-left": "15px"}
+                style={"margin-left": "100px"}
             )
         ])
     ]),
