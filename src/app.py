@@ -74,7 +74,7 @@ app.layout = html.Div([
         html.Div(className='img-container', children=[
             html.Img(src='assets/img/aboutus.jpg', alt='A coach talking to her team'),
             html.A('Image Source',
-                   href='https://www.dickssportinggoods.com/protips/sports-and-activities/soccer/soccer-coaching-tips-game-day-prep',
+                   href='https://www.nbcnews.com/news/world/italy-wins-european-soccer-championship-3-2-penalty-shootout-n1273643',
                    target='_blank')
         ])
     ]),
