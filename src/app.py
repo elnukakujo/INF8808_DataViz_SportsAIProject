@@ -84,55 +84,56 @@ app.layout = html.Div([
         ])
     ]),
     html.Div(className='match-overview', children=[
-        html.Div(className='description', children=[
-            html.H3('Match Overview'),
-            html.P(
-                "The first group of visualizations includes multiple graphics that illustrate various aspects of the matches. " +
-                "These visualizations are designed to address general questions you might have and to introduce you to " +
-                "our work. Specifically, we present:"
-            ),
-            html.Ol(className='fig-description', children=[
-                html.Li(
-                    "The number of goals scored and fouls committed in each match, under the assumption that the entertainment " +
-                    "value of a game is correlated with the number of goals."
+        html.Div(className='match-overview-content', children=[
+            html.Div(className='description', children=[
+                html.H3('Match Overview'),
+                html.P(
+                    "The first group of visualizations includes multiple graphics that illustrate various aspects of the matches. " +
+                    "These visualizations are designed to address general questions you might have and to introduce you to " +
+                    "our work. Specifically, we present:"
                 ),
-                html.Li(
-                    "A comparison between the number of goals scored in open play and those scored from set pieces.")
+                html.Ol(className='fig-description', children=[
+                    html.Li(
+                        "The number of goals scored and fouls committed in each match, under the assumption that the entertainment " +
+                        "value of a game is correlated with the number of goals."
+                    ),
+                    html.Li(
+                        "A comparison between the number of goals scored in open play and those scored from set pieces.")
+                ]),
+                html.P(
+                    "These visualizations offer a comprehensive overview of key match statistics, enhancing the understanding " +
+                    "of the factors that contribute to the dynamics of the game."
+                ),
+                html.P("Try hovering hover the elements in the graph and play with the legend to get more details!")
             ]),
-            html.P(
-                "These visualizations offer a comprehensive overview of key match statistics, enhancing the understanding " +
-                "of the factors that contribute to the dynamics of the game."
-            ),
-            html.P("Try hovering hover the elements in the graph and play with the legend to get more details!")
+            html.Div(className='viz-container', children=[
+                dcc.Graph(
+                    figure=fig1,
+                    config=dict(
+                        scrollZoom=False,
+                        showTips=False,
+                        showAxisDragHandles=False,
+                        doubleClick=False,
+                        displayModeBar=False
+                    ),
+                    className='graph',
+                    id='scatter-plot'
+                ),
+                html.Tr(),
+                dcc.Graph(
+                    figure=fig2,
+                    config=dict(
+                        scrollZoom=False,
+                        showTips=False,
+                        showAxisDragHandles=False,
+                        doubleClick=False,
+                        displayModeBar=False
+                    ),
+                    className='graph',
+                    id='stacked-bar'
+                )
+            ])
         ]),
-        html.Div(className='viz-container', children=[
-            dcc.Graph(
-                figure=fig1,
-                config=dict(
-                    scrollZoom=False,
-                    showTips=False,
-                    showAxisDragHandles=False,
-                    doubleClick=False,
-                    displayModeBar=False
-                ),
-                className='graph',
-                id='scatter-plot'
-            ),
-            html.Tr(),
-            dcc.Graph(
-                figure=fig2,
-                config=dict(
-                    scrollZoom=False,
-                    showTips=False,
-                    showAxisDragHandles=False,
-                    doubleClick=False,
-                    displayModeBar=False
-                ),
-                className='graph',
-                id='stacked-bar',
-                style={"margin-left": "100px"}
-            )
-        ])
     ]),
     html.Div(className='anchor', id='2'),
     html.Div(className='viz-container', children=[

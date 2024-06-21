@@ -95,6 +95,6 @@ def create_stacked_bars(df, hovertemplate):
         yaxis=dict(autorange="reversed"),
         xaxis=dict(range=[0, 8]),  # Adjust range as per your data
     )
-    fig.update_xaxes(title_font_size=12)
-    fig.update_yaxes(title_font_size=12)
+    fig.update_xaxes(title_font_size=12, tickfont_size=9)
+    fig.update_yaxes(title_font_size=12, tickfont_size=9)
     return fig
