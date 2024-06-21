@@ -53,7 +53,13 @@ import Arman.preprocess as arman_preprocess
 import Arman.make_viz as arman_makeviz
 
 radar_data = arman_preprocess.preprocess(match_stats)
-# fig8 = arman_makeviz.create_radar_chart(radar_data, 'Italy')
+fig8 = arman_makeviz.create_radar_chart(radar_data, 'Italy')
+
+import Ibrahima.preprocess as ibrahima_preprocess
+import Ibrahima.make_viz as ibrahima_makeviz
+
+df = ibrahima_preprocess.preprocess(player_stats)
+fig9 = ibrahima_makeviz.create_bar_chart(df)
 
 app.layout = html.Div([
     html.Div(className='anchor', id='0'),
@@ -248,10 +254,36 @@ app.layout = html.Div([
                         doubleClick=False,
                         displayModeBar=False
                     ),
-                    className='radar-chart'
+                    className='radar-chart',
+                    figure=fig8
                 )
             ])
         ])
+    ]),
+    html.Div(className='anchor', id='6'),
+    html.Div(className='tackles_bar', children=[
+        html.Div(className='tackles_bar_content', children=[
+            html.H3('Tackles'),
+            html.P(
+                "The following bar chart shows the number of tackles made by each player in the tournament. " +
+                "Tackles are an important defensive metric that can help assess a player's ability to regain possession of the ball. " +
+                "The chart provides insights into the defensive contributions of each player and highlights the top performers in this category."
+            ),
+            html.Div(className='viz-container', children=[
+                dcc.Graph(
+                    figure=fig9,
+                    config=dict(
+                        scrollZoom=False,
+                        showTips=False,
+                        showAxisDragHandles=False,
+                        doubleClick=False,
+                        displayModeBar=False
+                    ),
+                    className='graph',
+                    id='tackles-bar'
+                )
+            ])
+        ]),
     ])
 ])
 
