@@ -33,24 +33,46 @@ def create_scatter(df, hovertemplate):
     fig.update_layout(
         title=dict(
             text='Total Scores vs Total Fouls for Euro 2020 Matches',
-            font_size=14    
+            font_size=14,
+            font_family='Montserrat-Medium'    
         ),
-        xaxis_title='Total Scores',
-        yaxis_title='Total Fouls',
         template="simple_white",
-        showlegend=True,
         legend=dict(
             title=dict(
                 text='Rounds',
-                font_size=12
+                font_size=12,
+                font_family='Montserrat-Medium'
             ),
-            font_size=10,
+            font=dict(
+                size=10,
+                family='Roboto-Light'
+            )
         ),
-        xaxis=dict(range=[-1, 9]),
-        yaxis=dict(range=[-1, 39])
+        xaxis=dict(
+            title='Total Scores',
+            titlefont=dict(
+                size=12,
+                family='Montserrat-Medium'
+            ),
+            tickfont=dict(
+                size=10,
+                family='Roboto-Light'
+            ),
+            range=[-1, 9]
+        ),
+        yaxis=dict( 
+            title='Total Fouls',
+            titlefont=dict(
+                size=12,
+                family='Montserrat-Medium'
+            ),
+            tickfont=dict(
+                size=10,
+                family='Roboto-Light'
+            ),
+            range=[-1, 39]
+        )
     )
-    fig.update_xaxes(title_font_size=12)
-    fig.update_yaxes(title_font_size=12)
     return fig
 
 def create_stacked_bars(df, hovertemplate):
@@ -84,17 +106,43 @@ def create_stacked_bars(df, hovertemplate):
         barmode='stack',
         title=dict(
             text='Goals by Match (Horizontal Bar Chart)', 
-            font_size=14
+            font_size=14,
+            font_family='Montserrat-Medium'
         ),
         xaxis_title='Number of Goals',
         yaxis_title='Match',
         legend=dict(
-            title='Types of Goals',
-            font_size=12
+            title=dict(
+                text='Types of Goals',
+                font_size=12,
+                font_family='Montserrat-Medium'
+            ),
+            font=dict(
+                size=10,
+                family='Roboto-Light'
+            )
         ),
-        yaxis=dict(autorange="reversed"),
-        xaxis=dict(range=[0, 8]),  # Adjust range as per your data
+        xaxis=dict(
+            titlefont=dict(
+                size=12,
+                family='Montserrat-Medium'
+            ),
+            tickfont=dict(
+                size=10,
+                family='Roboto-Light'
+            ),
+            range=[0, 8]
+        ),
+        yaxis=dict( 
+            titlefont=dict(
+                size=12,
+                family='Montserrat-Medium'
+            ),
+            tickfont=dict(
+                size=10,
+                family='Roboto-Light'
+            ),
+            autorange="reversed"
+        )
     )
-    fig.update_xaxes(title_font_size=12, tickfont_size=9)
-    fig.update_yaxes(title_font_size=12, tickfont_size=9)
     return fig
