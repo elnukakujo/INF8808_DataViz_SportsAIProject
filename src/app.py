@@ -63,22 +63,24 @@ app.layout = html.Div([
     ]),
     html.Div(className='anchor', id='1'),
     html.Div(className='about_us', children=[
-        html.Div(className='description', children=[
-            html.H3('About Us'),
-            html.P(
-                "At SportsAI, we are dedicated to revolutionizing the way coaches enhance their players' " +
-                "performance through cutting-edge data visualization. Our team combines expertise in sports " +
-                "science and advanced analytics to provide insightful, actionable data that empowers coaches to " +
-                "make informed decisions. Whether it's tracking progress, identifying strengths and weaknesses, or " +
-                "optimizing training strategies, SportsAI is your partner in achieving peak performance. Join us and " +
-                "transform your data into a competitive edge."
-            )
-        ]),
-        html.Div(className='img-container', children=[
-            html.Img(src='assets/img/aboutus.jpg', alt='A coach talking to her team'),
-            html.A('Image Source',
-                   href='https://www.nbcnews.com/news/world/italy-wins-european-soccer-championship-3-2-penalty-shootout-n1273643',
-                   target='_blank')
+        html.Div(className='about-us-content', children=[
+            html.Div(className='description', children=[
+                html.H3('About Us'),
+                html.P(
+                    "At SportsAI, we are dedicated to revolutionizing the way coaches enhance their players' " +
+                    "performance through cutting-edge data visualization. Our team combines expertise in sports " +
+                    "science and advanced analytics to provide insightful, actionable data that empowers coaches to " +
+                    "make informed decisions. Whether it's tracking progress, identifying strengths and weaknesses, or " +
+                    "optimizing training strategies, SportsAI is your partner in achieving peak performance. Join us and " +
+                    "transform your data into a competitive edge."
+                )
+            ]),
+            html.Div(className='img-container', children=[
+                html.Img(src='assets/img/aboutus.jpg', alt='A coach talking to her team'),
+                html.A('Image Source',
+                    href='https://www.nbcnews.com/news/world/italy-wins-european-soccer-championship-3-2-penalty-shootout-n1273643',
+                    target='_blank')
+            ])
         ])
     ]),
     html.Div(className='match-overview', children=[
