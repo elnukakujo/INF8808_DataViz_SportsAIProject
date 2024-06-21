@@ -20,7 +20,7 @@ def create_pie_chart(labels, values, title):
         textposition='inside',
         textinfo='percent+label',
         marker=dict(colors=[role_colors[label] for label in labels]),
-        hovertemplate='<b>%{label}</b><br>Total: %{value}<br>Percentage: %{percent:.2f}%<extra></extra>'
+        hovertemplate='<b>%{label}</b><br>Total: %{value}<br>Percentage: {percent}%<extra></extra>'
     )
     fig.update_layout(
         title_text=title,
