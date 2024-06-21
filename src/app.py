@@ -86,8 +86,8 @@ app.layout = html.Div([
             html.H3('Match Overview'),
             html.P(
                 "The first group of visualizations includes multiple graphics that illustrate various aspects of the matches. " +
-                "These visualizations are designed to address general questions that users might have and to introduce them to " +
-                "our project. Specifically, we present:"
+                "These visualizations are designed to address general questions you might have and to introduce you to " +
+                "our work. Specifically, we present:"
             ),
             html.Ol(className='fig-description', children=[
                 html.Li(
