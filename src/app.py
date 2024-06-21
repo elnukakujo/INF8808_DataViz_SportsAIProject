@@ -79,8 +79,8 @@ app.layout = html.Div([
         ])
     ]),
     html.Div(className='match-overview', children=[
-        html.H3('Match Overview'),
         html.Div(className='description', children=[
+            html.H3('Match Overview'),
             html.P(
                 "The first group of visualizations includes multiple graphics that illustrate various aspects of the matches. " +
                 "These visualizations are designed to address general questions that users might have and to introduce them to " +

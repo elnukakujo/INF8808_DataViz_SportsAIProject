@@ -1,25 +1,40 @@
+@font-face {
+    font-family: 'Roboto-Light'; 
+    src: url('Roboto-Light.ttf');
+}
+
+@font-face {
+    font-family: 'Montserrat-Medium'; 
+    src: url('Montserrat-Medium.ttf');
+}
+
 body{
     background-color: rgb(255, 255, 255);
+    text-shadow:  2px 8px 16px 0px rgba(0,0,0,0.2);
+    font-family: 'Roboto-Light';
 }
 
 h1 {
     font-size: 60px;
+    font-family: 'Montserrat-Medium';
 }
 
 h2 {
     font-size: 45px;
+    font-family: 'Montserrat-Medium';
 }
 
 h3 {
     font-size: 25px;
+    font-family: 'Montserrat-Medium';
 }
 
 p{
-    font-size: 15px;
+    font-size: 20px;
 }
 
 ol{
-    font-size: 15px;
+    font-size: 20px;
 }
 
 .viz-container{
@@ -60,7 +75,6 @@ ol{
     color: rgba(255, 255, 255);
     font-weight:550;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    text-shadow:  2px 8px 16px 0px rgba(0,0,0,0.2);
     transition: 0.4s all ease-in-out;
     overflow: hidden;
 }
@@ -92,7 +106,6 @@ ol{
 }
 
 .about_us p{
-    font-size: 20px;
     font-weight:500;
     margin: 50px 0px;
     margin-top: 150px;
@@ -125,9 +138,19 @@ ol{
 
 
 .match-overview {
+    margin: 50px;
     padding: 30px 40px;
     background-color: #3a158a98;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    border-radius: 75px;
+}
+
+.match-overview .description{
+    margin: 75px 50px 30px;
+}
+
+.match-overview h3{
+    margin-left: 50px;
 }
 
 .match-overview .viz-container{
