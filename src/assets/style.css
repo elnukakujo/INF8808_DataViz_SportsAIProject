@@ -15,12 +15,12 @@ body{
 }
 
 h1 {
-    font-size: 60px;
+    font-size: 70px;
     font-family: 'Montserrat-Medium';
 }
 
 h2 {
-    font-size: 45px;
+    font-size: 50px;
     font-family: 'Montserrat-Medium';
 }
 
@@ -84,7 +84,7 @@ ol{
 }
 
 .intro h1{
-    letter-spacing: 4px;
+    letter-spacing: 7px;
 }
 
 .intro h2{
