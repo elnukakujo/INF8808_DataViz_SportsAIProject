@@ -88,6 +88,7 @@ ol{
     padding: 100px;
     display: flex;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    border-radius: 75px;
 }
 
 .about_us p{
@@ -105,7 +106,6 @@ ol{
     width: 600px;
     padding-left: 150px;
     margin: 50px 0px;
-    
 }
 
 .about_us .img-container a{
@@ -120,6 +120,7 @@ ol{
 .about_us .img-container img{
     width: 600px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    border-radius: 25px;
 }
 
 
