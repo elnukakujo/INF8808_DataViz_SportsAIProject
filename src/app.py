@@ -142,34 +142,58 @@ app.layout = html.Div([
         ]),
     ]),
     html.Div(className='anchor', id='2'),
-    html.Div(className='viz-container', children=[
-        dcc.Graph(
-            figure=fig3,
-            config=dict(
-                scrollZoom=False,
-                showTips=False,
-                showAxisDragHandles=False,
-                doubleClick=False,
-                displayModeBar=False
-            ),
-            className='graph',
-            id='bar1'
-        )
+    html.Div(className='peformance_metrics', children=[
+        html.Div(className='performance-metrics-content', children=[
+            html.Div(className='description',children=[
+                html.H3('Performance Metrics'),
+                html.P(
+                    "The following visualizations provide insights into the performance of each position during the tournament. " +
+                    "These metrics are crucial for evaluating player contributions and identifying key performers. The visualizations " +
+                    "include:"
+                ),
+            ]),
+            html.Div(className='viz-container', children=[
+                dcc.Graph(
+                    figure=fig3,
+                    config=dict(
+                        scrollZoom=False,
+                        showTips=False,
+                        showAxisDragHandles=False,
+                        doubleClick=False,
+                        displayModeBar=False
+                    ),
+                    className='graph',
+                    id='bar1'
+                )
+            ])
+        ])
     ]),
     html.Div(className='anchor', id='3'),
-    html.Div(className='viz-container', children=[
-        dcc.Graph(
-            figure=fig4,
-            config=dict(
-                scrollZoom=False,
-                showTips=False,
-                showAxisDragHandles=False,
-                doubleClick=False,
-                displayModeBar=False
-            ),
-            className='graph',
-            id='bar2'
-        )
+    html.Div(className='foot_analysis', children=[
+        html.Div(className='foot-analysis-content', children=[
+            html.Div(className='description', children=[
+                html.H3('Foot Analysis'),
+                html.P(
+                    "The following visualizations provide insights into the performance of the positions based on the foot used to score. " +
+                    "These metrics are crucial for evaluating player contributions and identifying key performers. The visualizations " +
+                    "include:"
+                ),
+            ]),
+            html.Div(className='viz-container', children=[
+                dcc.Graph(
+                    figure=fig4,
+                    config=dict(
+                        scrollZoom=False,
+                        showTips=False,
+                        showAxisDragHandles=False,
+                        doubleClick=False,
+                        displayModeBar=False
+                    ),
+                    className='graph',
+                    id='bar2'
+                )
+            ])
+        ])
     ]),
     html.Div(className='anchor', id='4'),
     html.Div(id='pie-charts', children=[
