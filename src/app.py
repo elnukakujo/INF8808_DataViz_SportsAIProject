@@ -204,7 +204,7 @@ app.layout = html.Div([
             html.Div(className='description',children=[
                 html.H3('Performance Metrics'),
                 html.P(
-                    "This bar chart which provides a clear visual comparison of key performance metrics across different soccer player positions."+
+                    "This bar chart provides a clear visual comparison of key performance metrics across different soccer player positions."+
                     " It allows for insightful analysis of how the roles and responsibilities of defenders, midfielders, forwards, and goalkeepers"+
                     " are reflected in their recovered balls, distance covered, tackles won, and fouls committed. This data visualization offers valuable"+
                     " insights into the distinct contributions of each position within a soccer team."
@@ -230,7 +230,7 @@ app.layout = html.Div([
             html.Div(className='description', children=[
                 html.H3('Foot Analysis'),
                 html.P(
-                    "This bar chart which provides a clear visualization of the number of goals scored by players in different positions "+
+                    "This bar chart provides a clear visualization of the number of goals scored by players in different positions "+
                     "(defenders, forwards, and midfielders) using their left and right feet. This data offers valuable insights into the "+
                     "preferred scoring tendencies and footedness of players in various roles. "
                 ),
