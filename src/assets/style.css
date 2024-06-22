@@ -34,7 +34,7 @@ p{
     letter-spacing: 1px;
 }
 
-ol{
+ol, li, ul{
     font-size: 20px;
 }
 
@@ -187,6 +187,65 @@ ol{
     height: 900px;
 }
 
+.radar_chart {
+    margin: 0px auto 100px;
+    padding: 30px 40px;
+    background-color: #658a158e;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    border-radius: 75px;
+    min-width: 1100px;
+    max-width: 1600px;
+}
+
+.radar_chart .radar_chart_content{
+    margin: 75px;
+}
+
+.radar_chart h3{
+    margin-left: 50px;
+}
+
+.radar_chart .viz-container{
+    width:800px;
+    height: 700px;
+    margin-top: 40px;
+}
+
+.radar_chart .viz-container .graph{
+    width:800px;
+    height: 650px;
+}
+
+.weather_performance {
+    margin: 0px auto 100px;
+    padding: 30px 40px;
+    background-color: #3a158a98;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    border-radius: 75px;
+    min-width: 1100px;
+    max-width: 1600px;
+    height: 1400px;
+}
+
+.weather_performance .weather_performance_content{
+    margin: 75px;
+}
+
+.weather_performance h3{
+    margin-left: 50px;
+}
+
+.weather_performance .viz-container{
+    width:800px;
+    height: 700px;
+    margin-top: 40px;
+}
+
+.weather_performance .viz-container .graph{
+    width:800px;
+    height: 650px;
+}
+
 .peformance_metrics {
     margin: 0px auto 100px;
     background-color: #658a158e;
@@ -284,33 +343,6 @@ ol{
 
 .stats_role .viz-container .graph {
     width: 1000px;
-}
-
-.radar-chart-section {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 20px;
-    background-color: rgba(184, 222, 245, 0.6);
-}
-
-.radar-chart {
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-}
-
-.radar-chart-explanation {
-    flex: 0 0 30%;
-    padding: 10px;
-}
-
-.radar-chart-container {
-    flex: 0 0 70%;
-    padding: 10px;
-}
-
-#first-team-dropdown, #second-team-dropdown {
-    margin-bottom: 10px;
 }
 
 .tackles_bar {

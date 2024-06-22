@@ -26,23 +26,28 @@ data = noe_preprocess.preprocess(match_infos, match_stats)
 fig1 = noe_make_viz.create_scatter(data, noe_hover.get_scatter_hover_template())
 fig2 = noe_make_viz.create_stacked_bars(data, noe_hover.get_stacked_bar_hover_template)
 
+import Arman.preprocess as arman_preprocess
+import Arman.make_viz as arman_makeviz
+
+radar_data = arman_preprocess.preprocess(match_stats)
+radar_fig = arman_makeviz.create_radar_chart(radar_data, 'Italy')
+
+import khedrO.preprocess as khedro_preprocess
+import khedrO.make_viz as khedro_make_viz
+
+bubble_data = khedro_preprocess.preprocess_data(match_infos, player_stats, line_ups)
+
 import Abdel.preprocess as abdel_preprocess
 import Abdel.make_viz as abdel_makeviz
 
 df1, df2 = abdel_preprocess.preprocess(player_stats, line_ups)
-fig3, fig4 = abdel_makeviz.create_bars(df1, df2)
+fig4, fig5 = abdel_makeviz.create_bars(df1, df2)
 
 import Amadeus.preprocess as amadeus_preprocess
 import Amadeus.make_viz as amadeus_makeviz
 
 df1, df2, df3 = amadeus_preprocess.preprocess(player_stats, line_ups)
-fig5, fig6, fig7 = amadeus_makeviz.draw(df1, df2, df3)
-
-import Arman.preprocess as arman_preprocess
-import Arman.make_viz as arman_makeviz
-
-radar_data = arman_preprocess.preprocess(match_stats)
-fig8 = arman_makeviz.create_radar_chart(radar_data, 'Italy')
+fig6, fig7, fig8 = amadeus_makeviz.draw(df1, df2, df3)
 
 import Ibrahima.preprocess as ibrahima_preprocess
 import Ibrahima.make_viz as ibrahima_makeviz
@@ -50,19 +55,8 @@ import Ibrahima.make_viz as ibrahima_makeviz
 df = ibrahima_preprocess.preprocess(player_stats)
 fig9 = ibrahima_makeviz.create_bar_chart(df)
 
-# khedro's part::
 
-import khedrO.preprocess as custom_preprocess
-import khedrO.make_viz as custom_make_viz
 
-# get dfs, have to reload otherwise we get a keyError !@!@ No idea why ... ::
-match_infos = get_df.get_df('Match_information')
-match_stats = get_df.get_df('Match_Stats')
-player_stats = get_df.get_df('Players_stats')
-line_ups = get_df.get_df('Line-ups')
-
-# preprocess::
-dfo = custom_preprocess.preprocess_data(match_infos, match_stats, player_stats, line_ups)
 
 app.layout = html.Div([
     html.Div(className='anchor', id='0'),
@@ -92,6 +86,7 @@ app.layout = html.Div([
             ])
         ])
     ]),
+    html.Div(className='anchor', id='2'),
     html.Div(className='match-overview', children=[
         html.Div(className='match-overview-content', children=[
             html.Div(className='description', children=[
@@ -115,7 +110,6 @@ app.layout = html.Div([
                 ),
                 html.P("Try hovering hover the elements in the graph and play with the legend to get more details!")
             ]),
-            
             html.Div(className='viz-container', children=[
                 html.Label('Select a plot:'),
                 dcc.Dropdown(
@@ -131,9 +125,80 @@ app.layout = html.Div([
                     id='scatter_horizontal_bar'
                 )
             ])
-        ]),
+        ])
     ]),
-    html.Div(className='anchor', id='2'),
+    html.Div(className='anchor', id='3'),
+    html.Div(className='radar_chart', children=[
+        html.Div(className='radar_chart_content', children=[
+            html.Div(className='description', children=[
+                html.H3('Team Performance Radar Chart'),
+                html.P(
+                    "The radar chart compares various performance metrics across teams. The first team is defaulted to Italy, the winner of the tournament. Each axis represents a different statistic: "
+                ),
+                html.Ul([
+                    html.Li("Goals Scored per Game: Average number of goals scored in each game. Note: This value is MinMax Scaled to [0,1] range."),
+                    html.Li("Attempts Accuracy: Percentage of attempts on target."),
+                    html.Li("Passes Accuracy: Percentage of successful passes."),
+                    html.Li("Fouls Committed per Game: Average number of fouls committed per game. Note: This value is MinMax Scaled to [0,1] range."),
+                    html.Li(
+                        "Ball Possession % per Game: Average percentage of time the team has possession of the ball.")
+                ])
+            ])
+        ]),
+        html.Div(className='viz-container', children=[
+            html.Label('Select First Team'),
+            dcc.Dropdown(
+                id='first-team-dropdown',
+                options=[{'label': team, 'value': team} for team in radar_data['TeamName']],
+                value='Italy'
+            ),
+            html.Label('Select Second Team'),
+            dcc.Dropdown(
+                id='second-team-dropdown',
+                options=[{'label': team, 'value': team} for team in radar_data['TeamName']]
+            ),
+            dcc.Graph(
+                id='radar1',
+                className='graph',
+                figure=radar_fig
+            )
+        ])
+    ]),
+    html.Div(className='anchor', id='4'),
+    html.Div(className='weather_performance', children=[
+        html.Div(className='weather_performance_content',children=[
+            html.Div(className='description', children=[
+                html.H3("Impact of Weather on Player Performance"),
+                html.P(
+                        "The bubble chart shows how meteorological conditions affect different players: "
+                ),
+                html.Ul([
+                    html.Li("Each bubble represents the selected players performance for a match. The size of the bubble is proportional to the players' performance for the chosen statistic."),
+                    html.Li("The color of the bubble indicates the average z-scores of temperature and humidity for the match in question."),
+                    html.Li("Should there be no data for a particular player, for the chosen statistic, 'No data available.' will be displayed. For example, if you look at yellow cards, and the player has none"),
+                    html.Li("Hover over the bubbles to obtain more detailed information. The value for the chosen statistic, the oppponent for the match in question, etc."),
+                ]),
+            ]),
+            html.Div(className='viz-container', children=[
+                html.Label('Select a Country'), 
+                dcc.Dropdown(
+                    id='country-dropdown',
+                    options=[{'label': country, 'value': country} for country in bubble_data['Country'].unique()]
+                ),
+                html.Label('Select a Player'), 
+                dcc.Dropdown(
+                    id='player-dropdown'
+                ),
+                html.Label('Select a Statistic'), 
+                dcc.Dropdown(
+                    id='stat-dropdown',
+                    options=[{'label': stat, 'value': stat} for stat in player_stats['StatsName'].unique()]
+                ),
+                html.Div(id='output-container')
+            ])
+        ])
+    ]),
+    html.Div(className='anchor', id='5'),
     html.Div(className='peformance_metrics', children=[
         html.Div(className='performance-metrics-content', children=[
             html.Div(className='description',children=[
@@ -152,14 +217,14 @@ app.layout = html.Div([
             ]),
             html.Div(className='viz-container', children=[
                 dcc.Graph(
-                    figure=fig3,
+                    figure=fig4,
                     className='graph',
                     id='bar1'
                 )
             ])
         ])
     ]),
-    html.Div(className='anchor', id='3'),
+    html.Div(className='anchor', id='6'),
     html.Div(className='foot_analysis', children=[
         html.Div(className='foot-analysis-content', children=[
             html.Div(className='description', children=[
@@ -177,14 +242,14 @@ app.layout = html.Div([
             ]),
             html.Div(className='viz-container', children=[
                 dcc.Graph(
-                    figure=fig4,
+                    figure=fig5,
                     className='graph',
                     id='bar2'
                 )
             ])
         ])
     ]),
-    html.Div(className='anchor', id='4'),
+    html.Div(className='anchor', id='7'),
     html.Div(className='stats_role', children=[
         html.Div(className='stats_role_content', children=[
             html.Div(className='description', children=[
@@ -214,42 +279,7 @@ app.layout = html.Div([
             ])
         ])
     ]),
-    html.Div(className='anchor', id='5'),
-    html.Div(className='radar-chart-section', children=[
-        html.Div(className='radar-chart-explanation', children=[
-            html.H3('Team Performance Radar Chart'),
-            html.P(
-                "The radar chart compares various performance metrics across teams. The first team is defaulted to Italy, the winner of the tournament. Each axis represents a different statistic: "
-            ),
-            html.Ul([
-                html.Li("Goals Scored per Game: Average number of goals scored in each game. Note: This value is MinMax Scaled to [0,1] range."),
-                html.Li("Attempts Accuracy: Percentage of attempts on target."),
-                html.Li("Passes Accuracy: Percentage of successful passes."),
-                html.Li("Fouls Committed per Game: Average number of fouls committed per game. Note: This value is MinMax Scaled to [0,1] range."),
-                html.Li(
-                    "Ball Possession % per Game: Average percentage of time the team has possession of the ball.")
-            ]),
-            html.Label('Select First Team'),
-            dcc.Dropdown(
-                id='first-team-dropdown',
-                options=[{'label': team, 'value': team} for team in radar_data['TeamName']],
-                value='Italy'
-            ),
-            html.Label('Select Second Team'),
-            dcc.Dropdown(
-                id='second-team-dropdown',
-                options=[{'label': team, 'value': team} for team in radar_data['TeamName']]
-            )
-        ]),
-        html.Div(className='radar-chart-container', children=[
-            dcc.Graph(
-                id='radar-chart',
-                className='radar-chart',
-                figure=fig8
-            )
-        ])
-    ]),
-    html.Div(className='anchor', id='6'),
+    html.Div(className='anchor', id='8'),
     html.Div(className='tackles_bar', children=[
         html.Div(className='tackles_bar_content', children=[
             html.H3('Tackles'),
@@ -261,22 +291,11 @@ app.layout = html.Div([
             html.Div(className='viz-container', children=[
                 dcc.Graph(
                     figure=fig9,
-                    config=dict(
-                        scrollZoom=False,
-                        showTips=False,
-                        showAxisDragHandles=False,
-                        doubleClick=False,
-                        displayModeBar=False
-                    ),
                     className='graph',
                     id='tackles-bar'
                 )
             ])
         ]),
-    ]),
-    html.Div(className='anchor', id='7'),
-    html.Div([
-        custom_make_viz.create_visualization(dfo)
     ])
 ])
 
@@ -290,21 +309,8 @@ def update_graph(selected_type):
     if selected_type == 'horizontal_bar':
         return fig2
     
-
 @app.callback(
-    Output('bar3', 'figure'),
-    Input('plot-selector', 'value')
-)
-def update_graph(selected_plot):
-    if selected_plot == 'contributions':
-        return fig5
-    elif selected_plot == 'goals':
-        return fig6
-    elif selected_plot == 'assists':
-        return fig7
-
-@app.callback(
-    Output('radar-chart', 'figure'),
+    Output('radar1', 'figure'),
     Input('first-team-dropdown', 'value'),
     Input('second-team-dropdown', 'value')
 )
@@ -322,14 +328,13 @@ def update_radar_chart(first_team, second_team):
         radar_fig = arman_makeviz.create_radar_chart(radar_data, first_team)
         return radar_fig
 
-# khedro's part::
 @app.callback(
 Output('player-dropdown', 'options'),
 Input('country-dropdown', 'value')
 )
 def update_player_dropdown(selected_country):
     if selected_country:
-        players = dfo[dfo['Country'] == selected_country]['FullName'].dropna().unique()
+        players = bubble_data[bubble_data['Country'] == selected_country]['FullName'].dropna().unique()
         return [{'label': player, 'value': player} for player in players]
     return []
 
@@ -340,7 +345,7 @@ def update_player_dropdown(selected_country):
      Input('stat-dropdown', 'value')]
 )
 def update_figure(selected_country, selected_player, selected_stat):
-    filtered_df = dfo[dfo['Country'] == selected_country]
+    filtered_df = bubble_data[bubble_data['Country'] == selected_country]
     filtered_df = filtered_df[filtered_df['FullName'] == selected_player]
     filtered_df = filtered_df[filtered_df['StatsName'] == selected_stat]
 
@@ -350,7 +355,18 @@ def update_figure(selected_country, selected_player, selected_stat):
     if (filtered_df['Value'] == 0).all():
         return html.Div("No data available.", style={'color': 'red', 'font-size': '20px', 'text-align': 'center', 'margin-top': '20px'})
 
-    return custom_make_viz.create_figure(filtered_df)
+    return khedro_make_viz.create_figure(filtered_df)
 
+@app.callback(
+    Output('bar3', 'figure'),
+    Input('plot-selector', 'value')
+)
+def update_graph(selected_plot):
+    if selected_plot == 'contributions':
+        return fig6
+    elif selected_plot == 'goals':
+        return fig7
+    elif selected_plot == 'assists':
+        return fig8
 
 server = app.server
