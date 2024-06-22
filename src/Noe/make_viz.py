@@ -71,7 +71,8 @@ def create_scatter(df, hovertemplate):
                 family='Roboto-Light'
             ),
             range=[-1, 39]
-        )
+        ),
+        dragmode=False
     )
     return fig
 
@@ -143,6 +144,7 @@ def create_stacked_bars(df, hovertemplate):
                 family='Roboto-Light'
             ),
             autorange="reversed"
-        )
+        ),
+        dragmode=False
     )
     return fig
