@@ -33,29 +33,29 @@ def create_scatter(df, hovertemplate):
     fig.update_layout(
         title=dict(
             text='Total Scores vs Total Fouls for Euro 2020 Matches',
-            font_size=14,
+            font_size=16,
             font_family='Montserrat-Medium'    
         ),
         template="simple_white",
         legend=dict(
             title=dict(
                 text='Rounds',
-                font_size=12,
+                font_size=14,
                 font_family='Montserrat-Medium'
             ),
             font=dict(
-                size=10,
+                size=12,
                 family='Roboto-Light'
             )
         ),
         xaxis=dict(
             title='Total Scores',
             titlefont=dict(
-                size=12,
+                size=14,
                 family='Montserrat-Medium'
             ),
             tickfont=dict(
-                size=10,
+                size=12,
                 family='Roboto-Light'
             ),
             range=[-1, 9]
@@ -63,15 +63,16 @@ def create_scatter(df, hovertemplate):
         yaxis=dict( 
             title='Total Fouls',
             titlefont=dict(
-                size=12,
+                size=14,
                 family='Montserrat-Medium'
             ),
             tickfont=dict(
-                size=10,
+                size=12,
                 family='Roboto-Light'
             ),
             range=[-1, 39]
-        )
+        ),
+        dragmode=False
     )
     return fig
 
@@ -106,7 +107,7 @@ def create_stacked_bars(df, hovertemplate):
         barmode='stack',
         title=dict(
             text='Goals by Match (Horizontal Bar Chart)', 
-            font_size=14,
+            font_size=16,
             font_family='Montserrat-Medium'
         ),
         xaxis_title='Number of Goals',
@@ -114,35 +115,36 @@ def create_stacked_bars(df, hovertemplate):
         legend=dict(
             title=dict(
                 text='Types of Goals',
-                font_size=12,
+                font_size=14,
                 font_family='Montserrat-Medium'
             ),
             font=dict(
-                size=10,
+                size=11,
                 family='Roboto-Light'
             )
         ),
         xaxis=dict(
             titlefont=dict(
-                size=12,
+                size=14,
                 family='Montserrat-Medium'
             ),
             tickfont=dict(
-                size=10,
+                size=11,
                 family='Roboto-Light'
             ),
             range=[0, 8]
         ),
         yaxis=dict( 
             titlefont=dict(
-                size=12,
+                size=14,
                 family='Montserrat-Medium'
             ),
             tickfont=dict(
-                size=10,
+                size=11,
                 family='Roboto-Light'
             ),
             autorange="reversed"
-        )
+        ),
+        dragmode=False
     )
     return fig

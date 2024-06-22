@@ -101,6 +101,12 @@ app.layout = html.Div([
                 ),
                 html.P("Try hovering hover the elements in the graph and play with the legend to get more details!")
             ]),
+            dcc.Dropdown(
+                id='type-dropdown',
+                options=[{'label': 'Total Score vs Fouls for Matches', 'value': 'scatter'},
+                         {'label': 'Goals Scored in Open Play vs Set Pieces', 'value': 'horizontal_bar'}],
+                value='scatter'
+            ),
             html.Div(className='viz-container', children=[
                 dcc.Graph(
                     figure=fig1,
@@ -112,11 +118,33 @@ app.layout = html.Div([
                         displayModeBar=False
                     ),
                     className='graph',
-                    id='scatter-plot'
+                    id='scatter_horizontal_bar'
+                )
+            ])
+        ]),
+    ]),
+    html.Div(className='anchor', id='2'),
+    html.Div(className='peformance_metrics', children=[
+        html.Div(className='performance-metrics-content', children=[
+            html.Div(className='description',children=[
+                html.H3('Performance Metrics'),
+                html.P(
+
+                    "The following visualizations provide insights into the performance of each position during the tournament."+
+                    "These metrics are crucial for evaluating player contributions and identifying key performers."+
+                    "The visualizations include:"+
+
+
+                    "This bar chart which provides a clear visual comparison of key performance metrics across different soccer player positions. It allows for insightful analysis of how the roles and responsibilities of defenders, midfielders, forwards, and goalkeepers are reflected in their recovered balls, distance covered, tackles won, and fouls committed. This data visualization offers valuable insights into the distinct contributions of each position within a soccer team."+
+ 
+                    "The comprehensive nature of the data presented and the intuitive layout of the chart make it an effective tool for coaches, analysts, and fans to understand the nuanced differences in the playing styles and tactical responsibilities of various player positions. This type of visual analysis can inform strategic decisions and player development efforts."
+
+                
                 ),
-                html.Tr(),
+            ]),
+            html.Div(className='viz-container', children=[
                 dcc.Graph(
-                    figure=fig2,
+                    figure=fig3,
                     config=dict(
                         scrollZoom=False,
                         showTips=False,
@@ -125,40 +153,42 @@ app.layout = html.Div([
                         displayModeBar=False
                     ),
                     className='graph',
-                    id='stacked-bar'
+                    id='bar1'
                 )
             ])
-        ]),
-    ]),
-    html.Div(className='anchor', id='2'),
-    html.Div(className='viz-container', children=[
-        dcc.Graph(
-            figure=fig3,
-            config=dict(
-                scrollZoom=False,
-                showTips=False,
-                showAxisDragHandles=False,
-                doubleClick=False,
-                displayModeBar=False
-            ),
-            className='graph',
-            id='bar1'
-        )
+        ])
     ]),
     html.Div(className='anchor', id='3'),
-    html.Div(className='viz-container', children=[
-        dcc.Graph(
-            figure=fig4,
-            config=dict(
-                scrollZoom=False,
-                showTips=False,
-                showAxisDragHandles=False,
-                doubleClick=False,
-                displayModeBar=False
-            ),
-            className='graph',
-            id='bar2'
-        )
+    html.Div(className='foot_analysis', children=[
+        html.Div(className='foot-analysis-content', children=[
+            html.Div(className='description', children=[
+                html.H3('Foot Analysis'),
+                html.P(
+
+                    "The following visualizations provide insights into the performance of the positions based on the foot used to score."+
+                    "These metrics are crucial for evaluating player contributions and identifying key performers."+
+                    "The visualizations include:"+
+
+                    "This bar chart which provides a clear visualization of the number of goals scored by players in different positions (defenders, forwards, and midfielders) using their left and right feet. This data offers valuable insights into the preferred scoring tendencies and footedness of players in various roles. " +
+                    "The chart shows that forwards score significantly more goals with their right foot compared to their left, while defenders and midfielders exhibit a more balanced distribution of goals between their two feet. This information can help coaches and analysts understand the unique strengths and preferences of players in each position, informing training and tactical decisions. "
+              
+                ),
+            ]),
+            html.Div(className='viz-container', children=[
+                dcc.Graph(
+                    figure=fig4,
+                    config=dict(
+                        scrollZoom=False,
+                        showTips=False,
+                        showAxisDragHandles=False,
+                        doubleClick=False,
+                        displayModeBar=False
+                    ),
+                    className='graph',
+                    id='bar2'
+                )
+            ])
+        ])
     ]),
     html.Div(className='anchor', id='4'),
     html.Div(id='plot-container', children=[
@@ -248,6 +278,17 @@ app.layout = html.Div([
         ]),
     ])
 ])
+
+@app.callback(
+    Output('scatter_horizontal_bar','figure'),
+    Input('type-dropdown', 'value')
+)
+def update_graph(selected_type):
+    if selected_type == 'scatter':
+        return fig1
+    if selected_type == 'horizontal_bar':
+        return fig2
+    
 
 @app.callback(
     Output('graph-display', 'figure'),
