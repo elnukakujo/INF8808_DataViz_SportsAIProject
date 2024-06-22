@@ -20,11 +20,8 @@ def create_bar_chart(labels, values, title):
     )
     fig.update_layout(
         title_text=title,
-        margin=dict(t=50, b=50, l=50, r=50),
-        height=600,
-        width=600,
         showlegend=False,
-        xaxis_title="Roles",
+        xaxis_title="Player Position",
         yaxis_title="Counts",
     )
     return fig

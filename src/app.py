@@ -1,14 +1,3 @@
-# -*- coding: utf-8 -*-
-
-'''
-    File name: app.py
-    Author: Noe Jager
-    Course: INF8808
-    Python Version: 3.8
-
-    This file is the entry point for our dash app.
-'''
-
 import dash
 import dash_html_components as html
 import dash_core_components as dcc
@@ -172,92 +161,65 @@ app.layout = html.Div([
         )
     ]),
     html.Div(className='anchor', id='4'),
-    html.Div(id='pie-charts', children=[
+    html.Div(id='plot-container', children=[
         html.Div(className='viz-container', children=[
-            dcc.Graph(
-                figure=fig5,
-                config=dict(
-                    scrollZoom=False,
-                    showTips=False,
-                    showAxisDragHandles=False,
-                    doubleClick=False,
-                    displayModeBar=False
-                ),
-                className='graph',
-                id='pie1'
+            html.Label('Select a plot:'),
+            dcc.Dropdown(
+                id='plot-selector',
+                options=[
+                    {'label': 'Contributions', 'value': 'contributions'},
+                    {'label': 'Goals', 'value': 'goals'},
+                    {'label': 'Assists', 'value': 'assists'}
+                ],
+                value='contributions',  # Default value
+                clearable=False
             ),
-        ]),
-        html.Div(className='viz-container', children=[
             dcc.Graph(
-                figure=fig6,
-                config=dict(
-                    scrollZoom=False,
-                    showTips=False,
-                    showAxisDragHandles=False,
-                    doubleClick=False,
-                    displayModeBar=False
-                ),
-                className='graph',
-                id='pie2'
-            ),
-        ]),
-        html.Div(className='viz-container', children=[
-            dcc.Graph(
-                figure=fig7,
-                config=dict(
-                    scrollZoom=False,
-                    showTips=False,
-                    showAxisDragHandles=False,
-                    doubleClick=False,
-                    displayModeBar=False
-                ),
-                className='graph',
-                id='pie3'
+                id='graph-display',
+                className='graph'
             )
         ])
     ]),
     html.Div(className='anchor', id='5'),
-    html.Div([
-        html.Div(className='radar-chart-section', children=[
-            html.Div(className='radar-chart-explanation', children=[
-                html.H3('Team Performance Radar Chart'),
-                html.P(
-                    "The radar chart compares various performance metrics across teams. The first team is defaulted to Italy, the winner of the tournament. Each axis represents a different statistic: "
-                ),
-                html.Ul([
-                    html.Li("Goals Scored per Game: Average number of goals scored in each game. Note: This value is MinMax Scaled to [0,1] range."),
-                    html.Li("Attempts Accuracy: Percentage of attempts on target."),
-                    html.Li("Passes Accuracy: Percentage of successful passes."),
-                    html.Li("Fouls Committed per Game: Average number of fouls committed per game. Note: This value is MinMax Scaled to [0,1] range."),
-                    html.Li(
-                        "Ball Possession % per Game: Average percentage of time the team has possession of the ball.")
-                ]),
-                html.Label('Select First Team'),
-                dcc.Dropdown(
-                    id='first-team-dropdown',
-                    options=[{'label': team, 'value': team} for team in radar_data['TeamName']],
-                    value='Italy'
-                ),
-                html.Label('Select Second Team'),
-                dcc.Dropdown(
-                    id='second-team-dropdown',
-                    options=[{'label': team, 'value': team} for team in radar_data['TeamName']]
-                )
+    html.Div(className='radar-chart-section', children=[
+        html.Div(className='radar-chart-explanation', children=[
+            html.H3('Team Performance Radar Chart'),
+            html.P(
+                "The radar chart compares various performance metrics across teams. The first team is defaulted to Italy, the winner of the tournament. Each axis represents a different statistic: "
+            ),
+            html.Ul([
+                html.Li("Goals Scored per Game: Average number of goals scored in each game. Note: This value is MinMax Scaled to [0,1] range."),
+                html.Li("Attempts Accuracy: Percentage of attempts on target."),
+                html.Li("Passes Accuracy: Percentage of successful passes."),
+                html.Li("Fouls Committed per Game: Average number of fouls committed per game. Note: This value is MinMax Scaled to [0,1] range."),
+                html.Li(
+                    "Ball Possession % per Game: Average percentage of time the team has possession of the ball.")
             ]),
-            html.Div(className='radar-chart-container', children=[
-                dcc.Graph(
-                    id='radar-chart',
-                    config=dict(
-                        scrollZoom=True,
-                        showTips=False,
-                        showAxisDragHandles=False,
-                        doubleClick=False,
-                        displayModeBar=False
-                    ),
-                    className='radar-chart',
-                    figure=fig8
-                )
-            ])
+            html.Label('Select First Team'),
+            dcc.Dropdown(
+                id='first-team-dropdown',
+                options=[{'label': team, 'value': team} for team in radar_data['TeamName']],
+                value='Italy'
+            ),
+            html.Label('Select Second Team'),
+            dcc.Dropdown(
+                id='second-team-dropdown',
+                options=[{'label': team, 'value': team} for team in radar_data['TeamName']]
+            )
+        ]),
+        html.Div(className='radar-chart-container', children=[
+            dcc.Graph(
+                id='radar-chart',
+                config=dict(
+                    scrollZoom=True,
+                    showTips=False,
+                    showAxisDragHandles=False,
+                    doubleClick=False,
+                    displayModeBar=False
+                ),
+                className='radar-chart',
+                figure=fig8
+            )
         ])
     ]),
     html.Div(className='anchor', id='6'),
@@ -286,6 +248,18 @@ app.layout = html.Div([
         ]),
     ])
 ])
+
+@app.callback(
+    Output('graph-display', 'figure'),
+    Input('plot-selector', 'value')
+)
+def update_graph(selected_plot):
+    if selected_plot == 'contributions':
+        return fig5
+    elif selected_plot == 'goals':
+        return fig6
+    elif selected_plot == 'assists':
+        return fig7
 
 @app.callback(
     Output('radar-chart', 'figure'),
