@@ -177,26 +177,14 @@ ol{
 }
 
 .match-overview .viz-container{
-    display: flex;
-    flex-wrap: wrap;
-    width: 90%;
-    height: auto;
+    width:1000px;
+    height: 900px;
+    margin-top: 40px;
 }
 
 .match-overview .viz-container .graph{
-    flex: 1 1 45%;
-}
-
-#scatter-plot{
-    left:0;
-    width: 600px;
-    margin-left: auto;
-}
-
-#stacked-bar{
-    right:0;
-    height: 800px;
-    width: 800px;
+    width:1000px;
+    height: 900px;
 }
 
 .peformance_metrics {

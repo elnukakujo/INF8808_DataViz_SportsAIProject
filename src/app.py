@@ -112,6 +112,12 @@ app.layout = html.Div([
                 ),
                 html.P("Try hovering hover the elements in the graph and play with the legend to get more details!")
             ]),
+            dcc.Dropdown(
+                id='type-dropdown',
+                options=[{'label': 'Total Score vs Fouls for Matches', 'value': 'scatter'},
+                         {'label': 'Goals Scored in Open Play vs Set Pieces', 'value': 'horizontal_bar'}],
+                value='scatter'
+            ),
             html.Div(className='viz-container', children=[
                 dcc.Graph(
                     figure=fig1,
@@ -123,20 +129,7 @@ app.layout = html.Div([
                         displayModeBar=False
                     ),
                     className='graph',
-                    id='scatter-plot'
-                ),
-                html.Tr(),
-                dcc.Graph(
-                    figure=fig2,
-                    config=dict(
-                        scrollZoom=False,
-                        showTips=False,
-                        showAxisDragHandles=False,
-                        doubleClick=False,
-                        displayModeBar=False
-                    ),
-                    className='graph',
-                    id='stacked-bar'
+                    id='scatter_horizontal_bar'
                 )
             ])
         ]),
@@ -310,6 +303,17 @@ app.layout = html.Div([
         ]),
     ])
 ])
+
+@app.callback(
+    Output('scatter_horizontal_bar','figure'),
+    Input('type-dropdown', 'value')
+)
+def update_graph(selected_type):
+    if selected_type == 'scatter':
+        return fig1
+    if selected_type == 'horizontal_bar':
+        return fig2
+    
 
 @app.callback(
     Output('radar-chart', 'figure'),
