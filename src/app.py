@@ -140,9 +140,12 @@ app.layout = html.Div([
             html.Div(className='description',children=[
                 html.H3('Performance Metrics'),
                 html.P(
-                    "The following visualizations provide insights into the performance of each position during the tournament. " +
-                    "These metrics are crucial for evaluating player contributions and identifying key performers. The visualizations " +
-                    "include:"
+                    "This bar chart provides a clear visual comparison of key performance metrics across different soccer player positions. It allows for insightful analysis of how the roles and responsibilities of defenders, midfielders, forwards, and goalkeepers are reflected in their recovered balls, distance covered, tackles won, and fouls committed. This data visualization offers valuable insights into the distinct contributions of each position within a soccer team.
+
+The comprehensive nature of the data presented and the intuitive layout of the chart make it an effective tool for coaches, analysts, and fans to understand the nuanced differences in the playing styles and tactical responsibilities of various player positions. This type of visual analysis can inform strategic decisions and player development efforts. " +
+                    "The comprehensive nature of the data presented and the intuitive layout of the chart make it an effective tool for coaches, analysts, and fans to understand the nuanced differences in the playing styles and tactical responsibilities of various player positions. This type of visual analysis can inform strategic decisions and player development efforts.
+ "
+                
                 ),
             ]),
             html.Div(className='viz-container', children=[
@@ -167,9 +170,9 @@ app.layout = html.Div([
             html.Div(className='description', children=[
                 html.H3('Foot Analysis'),
                 html.P(
-                    "The following visualizations provide insights into the performance of the positions based on the foot used to score. " +
-                    "These metrics are crucial for evaluating player contributions and identifying key performers. The visualizations " +
-                    "include:"
+                    "This bar chart provides a clear visualization of the number of goals scored by players in different positions (defenders, forwards, and midfielders) using their left and right feet. This data offers valuable insights into the preferred scoring tendencies and footedness of players in various roles. " +
+                    "The chart shows that forwards score significantly more goals with their right foot compared to their left, while defenders and midfielders exhibit a more balanced distribution of goals between their two feet. This information can help coaches and analysts understand the unique strengths and preferences of players in each position, informing training and tactical decisions. "
+              
                 ),
             ]),
             html.Div(className='viz-container', children=[
