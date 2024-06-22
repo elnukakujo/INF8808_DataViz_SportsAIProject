@@ -164,7 +164,7 @@ ol{
     background-color: #3a158a98;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     border-radius: 75px;
-    min-width: 800px;
+    min-width: 1100px;
     max-width: 1600px;
 }
 
@@ -193,7 +193,7 @@ ol{
     padding: 30px 40px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     border-radius: 75px;
-    min-width: 1000px;
+    min-width: 1100px;
     max-width: 1600px;
     height: auto;
 }
@@ -203,10 +203,7 @@ ol{
 }
 
 .peformance_metrics .performance-metrics-content {
-    height: auto;
-    margin: 75px auto;
-    min-width: 1000px;
-    max-width: 1200px;
+    margin: 75px;
 }
 
 .peformance_metrics .description {
@@ -229,7 +226,7 @@ ol{
     padding: 30px 40px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     border-radius: 75px;
-    min-width: 1000px;
+    min-width: 1100px;
     max-width: 1600px;
     height: auto;
 }
@@ -239,10 +236,7 @@ ol{
 }
 
 .foot_analysis .foot-analysis-content {
-    height: auto;
-    margin: 75px auto;
-    min-width: 1000px;
-    max-width: 1200px;
+    margin: 75px;
 }
 
 .foot_analysis .description {
@@ -256,6 +250,39 @@ ol{
 }
 
 .foot_analysis .viz-container .graph {
+    width: 1000px;
+}
+
+.stats_role {
+    margin: 0px auto 100px;
+    background-color: #658a158e;
+    padding: 30px 40px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    border-radius: 75px;
+    min-width: 1100px;
+    max-width: 1600px;
+    height: auto;
+}
+
+.stats_role h3{
+    margin-left: 50px;
+}
+
+.stats_role .stats_role_content {
+    margin: 75px;
+}
+
+.stats_role .description {
+    font-weight: 500;
+    margin: auto 0px;
+    margin-right: 15px;
+}
+
+.stats_role .viz-container {
+    width: 1000px;
+}
+
+.stats_role .viz-container .graph {
     width: 1000px;
 }
 

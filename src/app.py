@@ -50,6 +50,10 @@ import Ibrahima.make_viz as ibrahima_makeviz
 df = ibrahima_preprocess.preprocess(player_stats)
 fig9 = ibrahima_makeviz.create_bar_chart(df)
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2e36bbd (Added description to Amadeus and corrected abood desc)
 # khedro's part::
 
 import khedrO.preprocess as custom_preprocess
@@ -115,22 +119,18 @@ app.layout = html.Div([
                 ),
                 html.P("Try hovering hover the elements in the graph and play with the legend to get more details!")
             ]),
-            dcc.Dropdown(
-                id='type-dropdown',
-                options=[{'label': 'Total Score vs Fouls for Matches', 'value': 'scatter'},
-                         {'label': 'Goals Scored in Open Play vs Set Pieces', 'value': 'horizontal_bar'}],
-                value='scatter'
-            ),
+            
             html.Div(className='viz-container', children=[
+                html.Label('Select a plot:'),
+                dcc.Dropdown(
+                    id='type-dropdown',
+                    options=[{'label': 'Total Score vs Fouls for Matches', 'value': 'scatter'},
+                            {'label': 'Goals Scored in Open Play vs Set Pieces', 'value': 'horizontal_bar'}],
+                    value='scatter',
+                    clearable=False
+                ),
                 dcc.Graph(
                     figure=fig1,
-                    config=dict(
-                        scrollZoom=False,
-                        showTips=False,
-                        showAxisDragHandles=False,
-                        doubleClick=False,
-                        displayModeBar=False
-                    ),
                     className='graph',
                     id='scatter_horizontal_bar'
                 )
@@ -143,29 +143,20 @@ app.layout = html.Div([
             html.Div(className='description',children=[
                 html.H3('Performance Metrics'),
                 html.P(
-
-                    "The following visualizations provide insights into the performance of each position during the tournament."+
-                    "These metrics are crucial for evaluating player contributions and identifying key performers."+
-                    "The visualizations include:"+
-
-
-                    "This bar chart which provides a clear visual comparison of key performance metrics across different soccer player positions. It allows for insightful analysis of how the roles and responsibilities of defenders, midfielders, forwards, and goalkeepers are reflected in their recovered balls, distance covered, tackles won, and fouls committed. This data visualization offers valuable insights into the distinct contributions of each position within a soccer team."+
- 
-                    "The comprehensive nature of the data presented and the intuitive layout of the chart make it an effective tool for coaches, analysts, and fans to understand the nuanced differences in the playing styles and tactical responsibilities of various player positions. This type of visual analysis can inform strategic decisions and player development efforts."
-
-                
+                    "This bar chart which provides a clear visual comparison of key performance metrics across different soccer player positions."+
+                    " It allows for insightful analysis of how the roles and responsibilities of defenders, midfielders, forwards, and goalkeepers"+
+                    " are reflected in their recovered balls, distance covered, tackles won, and fouls committed. This data visualization offers valuable"+
+                    " insights into the distinct contributions of each position within a soccer team."
+                ),
+                html.P(
+                    "The comprehensive nature of the data presented and the intuitive layout of the chart make it an effective tool for coaches, analysts,"+
+                    " and fans to understand the nuanced differences in the playing styles and tactical responsibilities of various player positions. This"+
+                    " type of visual analysis can inform strategic decisions and player development efforts."
                 ),
             ]),
             html.Div(className='viz-container', children=[
                 dcc.Graph(
                     figure=fig3,
-                    config=dict(
-                        scrollZoom=False,
-                        showTips=False,
-                        showAxisDragHandles=False,
-                        doubleClick=False,
-                        displayModeBar=False
-                    ),
                     className='graph',
                     id='bar1'
                 )
@@ -178,26 +169,19 @@ app.layout = html.Div([
             html.Div(className='description', children=[
                 html.H3('Foot Analysis'),
                 html.P(
-
-                    "The following visualizations provide insights into the performance of the positions based on the foot used to score."+
-                    "These metrics are crucial for evaluating player contributions and identifying key performers."+
-                    "The visualizations include:"+
-
-                    "This bar chart which provides a clear visualization of the number of goals scored by players in different positions (defenders, forwards, and midfielders) using their left and right feet. This data offers valuable insights into the preferred scoring tendencies and footedness of players in various roles. " +
-                    "The chart shows that forwards score significantly more goals with their right foot compared to their left, while defenders and midfielders exhibit a more balanced distribution of goals between their two feet. This information can help coaches and analysts understand the unique strengths and preferences of players in each position, informing training and tactical decisions. "
-              
+                    "This bar chart which provides a clear visualization of the number of goals scored by players in different positions "+
+                    "(defenders, forwards, and midfielders) using their left and right feet. This data offers valuable insights into the "+
+                    "preferred scoring tendencies and footedness of players in various roles. "
+                ),
+                html.P(
+                    "The chart shows that forwards score significantly more goals with their right foot compared to their left, while defenders "+
+                    "and midfielders exhibit a more balanced distribution of goals between their two feet. This information can help coaches and "+
+                    "analysts understand the unique strengths and preferences of players in each position, informing training and tactical decisions. "
                 ),
             ]),
             html.Div(className='viz-container', children=[
                 dcc.Graph(
                     figure=fig4,
-                    config=dict(
-                        scrollZoom=False,
-                        showTips=False,
-                        showAxisDragHandles=False,
-                        doubleClick=False,
-                        displayModeBar=False
-                    ),
                     className='graph',
                     id='bar2'
                 )
@@ -205,23 +189,33 @@ app.layout = html.Div([
         ])
     ]),
     html.Div(className='anchor', id='4'),
-    html.Div(id='plot-container', children=[
-        html.Div(className='viz-container', children=[
-            html.Label('Select a plot:'),
-            dcc.Dropdown(
-                id='plot-selector',
-                options=[
-                    {'label': 'Contributions', 'value': 'contributions'},
-                    {'label': 'Goals', 'value': 'goals'},
-                    {'label': 'Assists', 'value': 'assists'}
-                ],
-                value='contributions',  # Default value
-                clearable=False
-            ),
-            dcc.Graph(
-                id='graph-display',
-                className='graph'
-            )
+    html.Div(className='stats_role', children=[
+        html.Div(className='stats_role_content', children=[
+            html.Div(className='description', children=[
+                html.H3('Player Stats by Role'),
+                html.P(
+                     "The following visualizations provide insights into the performance of players based on their roles during the tournament."+
+                     "These metrics are crucial for evaluating player contributions and identifying key performers."+
+                     "The visualizations include:"
+                ), 
+            ]),
+            html.Div(className='viz-container', children=[
+                html.Label('Select a plot:'),
+                dcc.Dropdown(
+                    id='plot-selector',
+                    options=[
+                        {'label': 'Contributions', 'value': 'contributions'},
+                        {'label': 'Goals', 'value': 'goals'},
+                        {'label': 'Assists', 'value': 'assists'}
+                    ],
+                    value='contributions',  # Default value
+                    clearable=False
+                ),
+                dcc.Graph(
+                    id='bar3',
+                    className='graph'
+                )
+            ])
         ])
     ]),
     html.Div(className='anchor', id='5'),
@@ -254,13 +248,6 @@ app.layout = html.Div([
         html.Div(className='radar-chart-container', children=[
             dcc.Graph(
                 id='radar-chart',
-                config=dict(
-                    scrollZoom=True,
-                    showTips=False,
-                    showAxisDragHandles=False,
-                    doubleClick=False,
-                    displayModeBar=False
-                ),
                 className='radar-chart',
                 figure=fig8
             )
@@ -309,7 +296,7 @@ def update_graph(selected_type):
     
 
 @app.callback(
-    Output('graph-display', 'figure'),
+    Output('bar3', 'figure'),
     Input('plot-selector', 'value')
 )
 def update_graph(selected_plot):
