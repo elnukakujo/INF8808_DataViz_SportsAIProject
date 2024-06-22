@@ -50,6 +50,20 @@ import Ibrahima.make_viz as ibrahima_makeviz
 df = ibrahima_preprocess.preprocess(player_stats)
 fig9 = ibrahima_makeviz.create_bar_chart(df)
 
+# khedro's part::
+
+import khedrO.preprocess as custom_preprocess
+import khedrO.make_viz as custom_make_viz
+
+# get dfs, have to reload otherwise we get a keyError !@!@ No idea why ... ::
+match_infos = get_df.get_df('Match_information')
+match_stats = get_df.get_df('Match_Stats')
+player_stats = get_df.get_df('Players_stats')
+line_ups = get_df.get_df('Line-ups')
+
+# preprocess::
+dfo = custom_preprocess.preprocess_data(match_infos, match_stats, player_stats, line_ups)
+
 app.layout = html.Div([
     html.Div(className='anchor', id='0'),
     html.Div(className='intro', children=[
@@ -276,6 +290,10 @@ app.layout = html.Div([
                 )
             ])
         ]),
+    ]),
+    html.Div(className='anchor', id='7'),
+    html.Div([
+        custom_make_viz.create_visualization(dfo)
     ])
 ])
 
@@ -320,6 +338,36 @@ def update_radar_chart(first_team, second_team):
     if not second_team:
         radar_fig = arman_makeviz.create_radar_chart(radar_data, first_team)
         return radar_fig
+
+# khedro's part::
+@app.callback(
+Output('player-dropdown', 'options'),
+Input('country-dropdown', 'value')
+)
+def update_player_dropdown(selected_country):
+    if selected_country:
+        players = dfo[dfo['Country'] == selected_country]['FullName'].dropna().unique()
+        return [{'label': player, 'value': player} for player in players]
+    return []
+
+@app.callback(
+    Output('output-container', 'children'),
+    [Input('country-dropdown', 'value'),
+     Input('player-dropdown', 'value'),
+     Input('stat-dropdown', 'value')]
+)
+def update_figure(selected_country, selected_player, selected_stat):
+    filtered_df = dfo[dfo['Country'] == selected_country]
+    filtered_df = filtered_df[filtered_df['FullName'] == selected_player]
+    filtered_df = filtered_df[filtered_df['StatsName'] == selected_stat]
+
+
+    if filtered_df.empty:
+        return html.Div("Select a Country, Player and Statistic.", style={'color': 'red', 'font-size': '20px', 'text-align': 'center', 'margin-top': '20px'})
+    if (filtered_df['Value'] == 0).all():
+        return html.Div("No data available.", style={'color': 'red', 'font-size': '20px', 'text-align': 'center', 'margin-top': '20px'})
+
+    return custom_make_viz.create_figure(filtered_df)
 
 
 server = app.server
