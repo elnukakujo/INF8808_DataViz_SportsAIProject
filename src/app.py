@@ -50,10 +50,6 @@ import Ibrahima.make_viz as ibrahima_makeviz
 df = ibrahima_preprocess.preprocess(player_stats)
 fig9 = ibrahima_makeviz.create_bar_chart(df)
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 2e36bbd (Added description to Amadeus and corrected abood desc)
 # khedro's part::
 
 import khedrO.preprocess as custom_preprocess
