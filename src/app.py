@@ -17,10 +17,13 @@ from Amadeus.preprocess import preprocess as amadeus_preprocess
 from Amadeus.make_viz import draw
 from Ibrahima.preprocess import preprocess as ibrahima_preprocess
 from Ibrahima.make_viz import create_bar_chart
+from template import create_template
 
 app = dash.Dash(__name__)
 app.title = 'SportsAI Project'
-pio.templates.default = 'simple_white'
+
+create_template()
+pio.templates.default = 'simple_white+mytemplate'
 
 # Preprocess data
 match_infos, match_stats, player_stats, line_ups = load_data()
@@ -83,7 +86,7 @@ app.layout = html.Div([
                 ),
                 html.P("Try hovering hover the elements in the graph and play with the legend to get more details!")
             ]),
-            html.Div(className='viz-container', children=[
+            html.Div(id='scatter_bar_container',className='viz-container', children=[
                 html.Label('Select a plot:'),
                 dcc.Dropdown(
                     id='type-dropdown',
@@ -303,14 +306,15 @@ def update_radar_chart(first_team, second_team):
         return create_radar_chart(radar_data, first_team)
 
 @app.callback(
-    Output('scatter_horizontal_bar','figure'),
+    [Output('scatter_horizontal_bar','figure'),
+     Output('scatter_bar_container','style')],
     Input('type-dropdown', 'value')
 )
 def update_graph(selected_type):
     if selected_type == 'scatter':
-        return create_scatter(data)
+        return create_scatter(data), {'width': '700px', 'height': '600px'}
     if selected_type == 'horizontal_bar':
-        return create_stacked_bars(data)
+        return create_stacked_bars(data), {'width': '800px', 'height': '900px'}
 
 @app.callback(
     Output('bar3', 'figure'),

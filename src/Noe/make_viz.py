@@ -33,44 +33,19 @@ def create_scatter(df):
     fig = go.Figure(data=traces)
     fig.update_layout(
         title=dict(
-            text='Total Scores vs Total Fouls for Euro 2020 Matches',
-            font_size=16,
-            font_family='Montserrat-Medium'    
+            text='Total Scores vs Total Fouls for Euro 2020 Matches' 
         ),
-        template="simple_white",
         legend=dict(
             title=dict(
                 text='Rounds',
-                font_size=14,
-                font_family='Montserrat-Medium'
-            ),
-            font=dict(
-                size=12,
-                family='Roboto-Light'
             )
         ),
         xaxis=dict(
             title='Total Scores',
-            titlefont=dict(
-                size=14,
-                family='Montserrat-Medium'
-            ),
-            tickfont=dict(
-                size=12,
-                family='Roboto-Light'
-            ),
             range=[-1, 9]
         ),
         yaxis=dict( 
             title='Total Fouls',
-            titlefont=dict(
-                size=14,
-                family='Montserrat-Medium'
-            ),
-            tickfont=dict(
-                size=12,
-                family='Roboto-Light'
-            ),
             range=[-1, 39]
         ),
         dragmode=False
@@ -104,46 +79,21 @@ def create_stacked_bars(df):
     ))
 
     fig.update_layout(
-        template='simple_white',
         barmode='stack',
         title=dict(
-            text='Goals by Match (Horizontal Bar Chart)', 
-            font_size=16,
-            font_family='Montserrat-Medium'
+            text='Goals by Match (Horizontal Bar Chart)'
         ),
-        xaxis_title='Number of Goals',
-        yaxis_title='Match',
         legend=dict(
             title=dict(
-                text='Types of Goals',
-                font_size=14,
-                font_family='Montserrat-Medium'
-            ),
-            font=dict(
-                size=11,
-                family='Roboto-Light'
+                text='Types of Goals'
             )
         ),
         xaxis=dict(
-            titlefont=dict(
-                size=14,
-                family='Montserrat-Medium'
-            ),
-            tickfont=dict(
-                size=11,
-                family='Roboto-Light'
-            ),
+            title='Number of Goals',
             range=[0, 8]
         ),
-        yaxis=dict( 
-            titlefont=dict(
-                size=14,
-                family='Montserrat-Medium'
-            ),
-            tickfont=dict(
-                size=11,
-                family='Roboto-Light'
-            ),
+        yaxis=dict(
+            title='Match',
             autorange="reversed"
         ),
         dragmode=False
