@@ -1,6 +1,4 @@
-# khedrO/preprocess.py
 import pandas as pd
-from scipy.stats import zscore
 
 def preprocess_data(match_infos, player_stats, line_ups):
     # Merge data
@@ -33,9 +31,18 @@ def preprocess_data(match_infos, player_stats, line_ups):
     df['Value'] = pd.to_numeric(df['Value'], errors='coerce')
     df = df.dropna(subset=['Value', 'Country'])
 
-    # Calculate z-scores
-    df['Temperature_zscore'] = zscore(df['Temperature'])
-    df['Humidity_zscore'] = zscore(df['Humidity'])
+    # Calculate z-scores manually
+    df['Temperature_mean'] = df.groupby('Country')['Temperature'].transform('mean')
+    df['Temperature_std'] = df.groupby('Country')['Temperature'].transform('std')
+    df['Temperature_zscore'] = (df['Temperature'] - df['Temperature_mean']) / df['Temperature_std']
+
+    df['Humidity_mean'] = df.groupby('Country')['Humidity'].transform('mean')
+    df['Humidity_std'] = df.groupby('Country')['Humidity'].transform('std')
+    df['Humidity_zscore'] = (df['Humidity'] - df['Humidity_mean']) / df['Humidity_std']
+
     df['Average_zscore'] = (df['Temperature_zscore'] + df['Humidity_zscore']) / 2
+
+    # Drop intermediate columns
+    df.drop(['Temperature_mean', 'Temperature_std', 'Humidity_mean', 'Humidity_std'], axis=1, inplace=True)
 
     return df
