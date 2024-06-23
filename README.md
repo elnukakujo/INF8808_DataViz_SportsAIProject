@@ -6,9 +6,10 @@ In the project folder:
 
 ### Installation and run
 
-    python -m virtualenv -p python3.10 venv
+    pip install virtualenv
+    python -m virtualenv -p python3 venv
     venv\Scripts\activate
-    python -m pip install -r requirements.windows.txt
+    python -m pip install -r requirements.txt
     cd src
     python server.py
 
@@ -24,9 +25,10 @@ In the project folder:
 
 ### Installation and run
 
-    python3.10 -m virtualenv -p python3.10 venv
+    pip3 install virtualenv
+    python3 -m virtualenv -p python3 venv
     source venv/bin/activate
-    python3.10 -m pip install -r requirements.linux.txt
+    python3.10 -m pip install -r requirements.txt
     cd src
     python3.10 server.py
 
