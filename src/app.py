@@ -39,14 +39,12 @@ fig6, fig7, fig8 = draw(df1_amadeus, df2_amadeus, df3_amadeus)
 fig9 = create_bar_chart(df_ibrahima)
 
 app.layout = html.Div([
-    html.Div(className='anchor', id='0'),
     html.Div(className='intro', children=[
         html.H1('SportsAI'),
         html.H2('Boost your Players with Data'),
     ]),
-    html.Div(className='anchor', id='1'),
-    html.Div(className='about_us', children=[
-        html.Div(className='about-us-content', children=[
+    html.Div(className='section',id='about_us', children=[
+        html.Div(className='content', children=[
             html.Div(className='description', children=[
                 html.H3('About Us'),
                 html.P(
@@ -66,9 +64,8 @@ app.layout = html.Div([
             ])
         ])
     ]),
-    html.Div(className='anchor', id='2'),
-    html.Div(className='match-overview', children=[
-        html.Div(className='match-overview-content', children=[
+    html.Div(className='section',id='match_overview', children=[
+        html.Div(className='content', children=[
             html.Div(className='description', children=[
                 html.H3('Match Overview'),
                 html.P(
@@ -76,7 +73,7 @@ app.layout = html.Div([
                     "These visualizations are designed to address general questions you might have and to introduce you to " +
                     "our work. Specifically, we present:"
                 ),
-                html.Ol(className='fig-description', children=[
+                html.Ol(children=[
                     html.Li(
                         "The number of goals scored and fouls committed in each match, under the assumption that the entertainment " +
                         "value of a game is correlated with the number of goals."
@@ -107,9 +104,8 @@ app.layout = html.Div([
             ])
         ])
     ]),
-    html.Div(className='anchor', id='3'),
-    html.Div(className='radar_chart', children=[
-        html.Div(className='radar_chart_content', children=[
+    html.Div(className='section',id='radar_chart', children=[
+        html.Div(className='content', children=[
             html.Div(className='description', children=[
                 html.H3('Team Performance Radar Chart'),
                 html.P(
@@ -144,9 +140,8 @@ app.layout = html.Div([
             )
         ])
     ]),
-    html.Div(className='anchor', id='4'),
-    html.Div(className='weather_performance', children=[
-        html.Div(className='weather_performance_content',children=[
+    html.Div(className='section',id='weather_performance', children=[
+        html.Div(className='content',children=[
             html.Div(className='description', children=[
                 html.H3("Impact of Weather on Player Performance"),
                 html.P(
@@ -178,9 +173,8 @@ app.layout = html.Div([
             ])
         ])
     ]),
-    html.Div(className='anchor', id='5'),
-    html.Div(className='peformance_metrics', children=[
-        html.Div(className='performance-metrics-content', children=[
+    html.Div(className='section',id='peformance_metrics', children=[
+        html.Div(className='content', children=[
             html.Div(className='description',children=[
                 html.H3('Performance Metrics'),
                 html.P(
@@ -204,9 +198,8 @@ app.layout = html.Div([
             ])
         ])
     ]),
-    html.Div(className='anchor', id='6'),
-    html.Div(className='foot_analysis', children=[
-        html.Div(className='foot-analysis-content', children=[
+    html.Div(className='section',id='foot_analysis', children=[
+        html.Div(className='content', children=[
             html.Div(className='description', children=[
                 html.H3('Foot Analysis'),
                 html.P(
@@ -229,9 +222,8 @@ app.layout = html.Div([
             ])
         ])
     ]),
-    html.Div(className='anchor', id='7'),
-    html.Div(className='stats_role', children=[
-        html.Div(className='stats_role_content', children=[
+    html.Div(className='section',id='stats_role', children=[
+        html.Div(className='content', children=[
             html.Div(className='description', children=[
                 html.H3('Player Stats by Role'),
                 html.P(
@@ -259,9 +251,8 @@ app.layout = html.Div([
             ])
         ])
     ]),
-    html.Div(className='anchor', id='8'),
-    html.Div(className='tackles_bar', children=[
-        html.Div(className='tackles_bar_content', children=[
+    html.Div(className='section',id='tackles_bar', children=[
+        html.Div(className='content', children=[
             html.H3('Tackles'),
             html.P(
                 "The following bar chart shows the number of tackles made by each player in the tournament. " +
