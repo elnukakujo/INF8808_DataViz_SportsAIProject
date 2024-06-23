@@ -3,6 +3,7 @@
 '''
 import plotly.graph_objects as go
 import Noe.hovertemplate as hover
+import numpy as np
 
 def create_scatter(df):
     round_colors = {'Final Tournament': 'blue',
@@ -18,14 +19,15 @@ def create_scatter(df):
     traces = []
     
     for round_name, group in df.groupby('RoundName'):
+        jitter_x = group['TotalScore'] + np.random.uniform(-0.5,0.5,size=len(group))
         trace = go.Scatter(
-            x=group['TotalScore'],
+            x=jitter_x,
             y=group['TotalFouls'],
             mode='markers',
             marker=dict(color=round_colors[round_name], size=12),
             name=round_name,
             hovertemplate=hover.get_scatter_hover_template(),
-            customdata=group[['RoundName', 'MatchName']].values.tolist()
+            customdata=group[['RoundName', 'MatchName','TotalScore']].values.tolist()
         )
         traces.append(trace)
 
