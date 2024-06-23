@@ -2,8 +2,9 @@
     Draw the figures 
 '''
 import plotly.graph_objects as go
+import Noe.hovertemplate as hover
 
-def create_scatter(df, hovertemplate):
+def create_scatter(df):
     round_colors = {'Final Tournament': 'blue',
         'Eighth Finals': 'green',
         'Quarter Finals': 'orange',
@@ -23,7 +24,7 @@ def create_scatter(df, hovertemplate):
             mode='markers',
             marker=dict(color=round_colors[round_name], size=12),
             name=round_name,
-            hovertemplate=hovertemplate,
+            hovertemplate=hover.get_scatter_hover_template(),
             customdata=group[['RoundName', 'MatchName']].values.tolist()
         )
         traces.append(trace)
@@ -76,7 +77,7 @@ def create_scatter(df, hovertemplate):
     )
     return fig
 
-def create_stacked_bars(df, hovertemplate):
+def create_stacked_bars(df):
     df['TotalGoals'] = df['GoalsOpenPlay'] + df['GoalsSetPieces']
     
     # Sort DataFrame by TotalGoals in descending order
@@ -90,7 +91,7 @@ def create_stacked_bars(df, hovertemplate):
         name='Goals Open Play',
         orientation='h',
         customdata=df['RoundName'],
-        hovertemplate=hovertemplate('Goals Open Play')
+        hovertemplate=hover.get_stacked_bar_hover_template('Goals Open Play')
     ))
 
     fig.add_trace(go.Bar(
@@ -99,7 +100,7 @@ def create_stacked_bars(df, hovertemplate):
         name='Goals Set Pieces',
         orientation='h',
         customdata=df['RoundName'],
-        hovertemplate=hovertemplate('Goals Set Pieces')
+        hovertemplate=hover.get_stacked_bar_hover_template('Goals Set Pieces')
     ))
 
     fig.update_layout(

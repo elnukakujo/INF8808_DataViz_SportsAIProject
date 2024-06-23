@@ -7,7 +7,7 @@ def create_radar_chart(merged_stats, team):
     categories = ['Goals Scored per Game',
                   'Attempts Accuracy',
                   'Passes Accuracy',
-                  'Fouls Commited per Game',
+                  'Fouls Committed per Game',
                   'Ball Possession % per Game']
 
     values = [team_stats['Scaled Value Goals'],
@@ -19,7 +19,7 @@ def create_radar_chart(merged_stats, team):
     actual_values = [team_stats['Average Goals Scored per Game'],
                      team_stats['Average Attempts % Accuracy'],
                      team_stats['Average Passes Accuracy'],
-                     team_stats['Average Fouls Commited per Game'],
+                     team_stats['Average Fouls Committed per Game'],
                      team_stats['Average Ball Possession % per Game']]
 
     hover_template = (
@@ -69,7 +69,7 @@ def add_team_to_radar_chart(fig, merged_stats, second_team):
     categories = ['Goals Scored per Game',
                   'Attempts Accuracy',
                   'Passes Accuracy',
-                  'Fouls Commited per Game',
+                  'Fouls Committed per Game',
                   'Ball Possession % per Game']
 
     values = [team_stats['Scaled Value Goals'],
@@ -81,7 +81,7 @@ def add_team_to_radar_chart(fig, merged_stats, second_team):
     actual_values = [team_stats['Average Goals Scored per Game'],
                      team_stats['Average Attempts % Accuracy'],
                      team_stats['Average Passes Accuracy'],
-                     team_stats['Average Fouls Commited per Game'],
+                     team_stats['Average Fouls Committed per Game'],
                      team_stats['Average Ball Possession % per Game']]
 
     hover_template = (

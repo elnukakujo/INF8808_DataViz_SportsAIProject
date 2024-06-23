@@ -3,10 +3,6 @@ import pandas as pd
 from scipy.stats import zscore
 
 def preprocess_data(match_infos, player_stats, line_ups):
-    # Create a FullName column to facilitate plotting
-    player_stats["FullName"] = player_stats["PlayerName"] + " " + player_stats["PlayerSurname"]
-    line_ups["FullName"] = line_ups["OfficialName"] + " " + line_ups["OfficialSurname"]
-
     # Merge data
     df = pd.merge(player_stats, match_infos[['MatchID', 'Temperature', 'Humidity']], on=['MatchID'], how='inner')
     df = pd.merge(df, line_ups[['MatchID', 'Country', 'FullName']], on=['MatchID', 'FullName'], how='inner')

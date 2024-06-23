@@ -1,62 +1,50 @@
 import dash
 import dash_html_components as html
 import dash_core_components as dcc
-import plotly.io as pio
 from dash import Input, Output
-import plotly.graph_objects as go
+import plotly.io as pio
+import get_df
+from Noe.preprocess import preprocess as noe_preprocess
+from Noe.make_viz import create_scatter, create_stacked_bars
+from Arman.preprocess import preprocess as arman_preprocess
+from Arman.make_viz import create_radar_chart, add_team_to_radar_chart, create_empty_radar_chart
+from khedrO.preprocess import preprocess_data
+from khedrO.make_viz import create_figure
+from Abdel.preprocess import preprocess as abdel_preprocess
+from Abdel.make_viz import create_bars
+from Amadeus.preprocess import preprocess as amadeus_preprocess
+from Amadeus.make_viz import draw
+from Ibrahima.preprocess import preprocess as ibrahima_preprocess
+from Ibrahima.make_viz import create_bar_chart
 
 app = dash.Dash(__name__)
 app.title = 'SportsAI Project'
-
-import get_df
-
-match_infos = get_df.get_df('Match_information')
-match_stats = get_df.get_df('Match_Stats')
-player_stats = get_df.get_df('Players_stats')
-line_ups = get_df.get_df('Line-ups')
-
 pio.templates.default = 'simple_white'
 
-import Noe.preprocess as noe_preprocess
-import Noe.make_viz as noe_make_viz
-import Noe.hovertemplate as noe_hover
+# Function to load data
+def load_data():
+    match_infos = get_df.get_df('Match_information')
+    match_stats = get_df.get_df('Match_Stats')
+    player_stats = get_df.get_df('Players_stats')
+    line_ups = get_df.get_df('Line-ups')
+    return match_infos, match_stats, player_stats, line_ups
 
-data = noe_preprocess.preprocess(match_infos, match_stats)
+# Preprocess data
+match_infos, match_stats, player_stats, line_ups = load_data()
+data = noe_preprocess(match_infos, match_stats)
+radar_data = arman_preprocess(match_stats)
+bubble_data = preprocess_data(match_infos, player_stats, line_ups)
+df1, df2 = abdel_preprocess(player_stats, line_ups)
+df1_amadeus, df2_amadeus, df3_amadeus = amadeus_preprocess(player_stats, line_ups)
+df_ibrahima = ibrahima_preprocess(player_stats)
 
-fig1 = noe_make_viz.create_scatter(data, noe_hover.get_scatter_hover_template())
-fig2 = noe_make_viz.create_stacked_bars(data, noe_hover.get_stacked_bar_hover_template)
-
-import Arman.preprocess as arman_preprocess
-import Arman.make_viz as arman_makeviz
-
-radar_data = arman_preprocess.preprocess(match_stats)
-radar_fig = arman_makeviz.create_radar_chart(radar_data, 'Italy')
-
-import khedrO.preprocess as khedro_preprocess
-import khedrO.make_viz as khedro_make_viz
-
-bubble_data = khedro_preprocess.preprocess_data(match_infos, player_stats, line_ups)
-
-import Abdel.preprocess as abdel_preprocess
-import Abdel.make_viz as abdel_makeviz
-
-df1, df2 = abdel_preprocess.preprocess(player_stats, line_ups)
-fig4, fig5 = abdel_makeviz.create_bars(df1, df2)
-
-import Amadeus.preprocess as amadeus_preprocess
-import Amadeus.make_viz as amadeus_makeviz
-
-df1, df2, df3 = amadeus_preprocess.preprocess(player_stats, line_ups)
-fig6, fig7, fig8 = amadeus_makeviz.draw(df1, df2, df3)
-
-import Ibrahima.preprocess as ibrahima_preprocess
-import Ibrahima.make_viz as ibrahima_makeviz
-
-df = ibrahima_preprocess.preprocess(player_stats)
-fig9 = ibrahima_makeviz.create_bar_chart(df)
-
-
-
+# Create initial figures
+fig1 = create_scatter(data)
+fig2 = create_stacked_bars(data)
+radar_fig = create_radar_chart(radar_data, 'Italy')
+fig4, fig5 = create_bars(df1, df2)
+fig6, fig7, fig8 = draw(df1_amadeus, df2_amadeus, df3_amadeus)
+fig9 = create_bar_chart(df_ibrahima)
 
 app.layout = html.Div([
     html.Div(className='anchor', id='0'),
@@ -300,6 +288,45 @@ app.layout = html.Div([
 ])
 
 @app.callback(
+    Output('output-container', 'children'),
+    [Input('country-dropdown', 'value'),
+     Input('player-dropdown', 'value'),
+     Input('stat-dropdown', 'value')]
+)
+def update_figure(selected_country, selected_player, selected_stat):
+    filtered_df = bubble_data[(bubble_data['Country'] == selected_country) &
+                              (bubble_data['FullName'] == selected_player) &
+                              (bubble_data['StatsName'] == selected_stat)]
+
+    if filtered_df.empty:
+        return html.Div("Select a Country, Player, and Statistic.",
+                        style={'color': 'red', 'font-size': '20px', 'text-align': 'center', 'margin-top': '20px'})
+    if (filtered_df['Value'] == 0).all():
+        return html.Div("No data available.",
+                        style={'color': 'red', 'font-size': '20px', 'text-align': 'center', 'margin-top': '20px'})
+
+    return create_figure(filtered_df)
+
+@app.callback(
+    Output('radar1', 'figure'),
+    Input('first-team-dropdown', 'value'),
+    Input('second-team-dropdown', 'value')
+)
+def update_radar_chart(first_team, second_team):
+    if first_team and second_team:
+        radar_fig = create_radar_chart(radar_data, first_team)
+        add_team_to_radar_chart(radar_fig, radar_data, second_team)
+        return radar_fig
+    if not first_team and not second_team:
+        return create_empty_radar_chart()
+    if not first_team:
+        radar_fig = create_radar_chart(radar_data, second_team)
+        return radar_fig
+    if not second_team:
+        radar_fig = create_radar_chart(radar_data, first_team)
+        return radar_fig
+
+@app.callback(
     Output('scatter_horizontal_bar','figure'),
     Input('type-dropdown', 'value')
 )
@@ -308,54 +335,6 @@ def update_graph(selected_type):
         return fig1
     if selected_type == 'horizontal_bar':
         return fig2
-    
-@app.callback(
-    Output('radar1', 'figure'),
-    Input('first-team-dropdown', 'value'),
-    Input('second-team-dropdown', 'value')
-)
-def update_radar_chart(first_team, second_team):
-    if first_team and second_team:
-        radar_fig = arman_makeviz.create_radar_chart(radar_data, first_team)
-        arman_makeviz.add_team_to_radar_chart(radar_fig, radar_data, second_team)
-        return radar_fig
-    if not first_team and not second_team:
-        return arman_makeviz.create_empty_radar_chart()
-    if not first_team:
-        radar_fig = arman_makeviz.create_radar_chart(radar_data, second_team)
-        return radar_fig
-    if not second_team:
-        radar_fig = arman_makeviz.create_radar_chart(radar_data, first_team)
-        return radar_fig
-
-@app.callback(
-Output('player-dropdown', 'options'),
-Input('country-dropdown', 'value')
-)
-def update_player_dropdown(selected_country):
-    if selected_country:
-        players = bubble_data[bubble_data['Country'] == selected_country]['FullName'].dropna().unique()
-        return [{'label': player, 'value': player} for player in players]
-    return []
-
-@app.callback(
-    Output('output-container', 'children'),
-    [Input('country-dropdown', 'value'),
-     Input('player-dropdown', 'value'),
-     Input('stat-dropdown', 'value')]
-)
-def update_figure(selected_country, selected_player, selected_stat):
-    filtered_df = bubble_data[bubble_data['Country'] == selected_country]
-    filtered_df = filtered_df[filtered_df['FullName'] == selected_player]
-    filtered_df = filtered_df[filtered_df['StatsName'] == selected_stat]
-
-
-    if filtered_df.empty:
-        return html.Div("Select a Country, Player and Statistic.", style={'color': 'red', 'font-size': '20px', 'text-align': 'center', 'margin-top': '20px'})
-    if (filtered_df['Value'] == 0).all():
-        return html.Div("No data available.", style={'color': 'red', 'font-size': '20px', 'text-align': 'center', 'margin-top': '20px'})
-
-    return khedro_make_viz.create_figure(filtered_df)
 
 @app.callback(
     Output('bar3', 'figure'),
@@ -368,5 +347,15 @@ def update_graph(selected_plot):
         return fig7
     elif selected_plot == 'assists':
         return fig8
+
+@app.callback(
+Output('player-dropdown', 'options'),
+Input('country-dropdown', 'value')
+)
+def update_player_dropdown(selected_country):
+    if selected_country:
+        players = bubble_data[bubble_data['Country'] == selected_country]['FullName'].dropna().unique()
+        return [{'label': player, 'value': player} for player in players]
+    return []
 
 server = app.server

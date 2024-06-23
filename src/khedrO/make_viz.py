@@ -1,6 +1,5 @@
-# khedrO/make_viz.py
 import plotly.express as px
-from dash import dcc, html
+from dash import dcc
 
 def create_figure(filtered_df):
     fig = px.scatter(
