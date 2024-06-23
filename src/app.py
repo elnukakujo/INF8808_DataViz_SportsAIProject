@@ -3,7 +3,7 @@ import dash_html_components as html
 import dash_core_components as dcc
 from dash import Input, Output
 import plotly.io as pio
-import get_df
+from get_df import load_data
 from Noe.preprocess import preprocess as noe_preprocess
 from Noe.make_viz import create_scatter, create_stacked_bars
 from Arman.preprocess import preprocess as arman_preprocess
@@ -20,14 +20,6 @@ from Ibrahima.make_viz import create_bar_chart
 app = dash.Dash(__name__)
 app.title = 'SportsAI Project'
 pio.templates.default = 'simple_white'
-
-# Function to load data
-def load_data():
-    match_infos = get_df.get_df('Match_information')
-    match_stats = get_df.get_df('Match_Stats')
-    player_stats = get_df.get_df('Players_stats')
-    line_ups = get_df.get_df('Line-ups')
-    return match_infos, match_stats, player_stats, line_ups
 
 # Preprocess data
 match_infos, match_stats, player_stats, line_ups = load_data()

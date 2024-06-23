@@ -10,3 +10,10 @@ def get_df(sheet_name):
         return data
     else:
         return data
+
+def load_data():
+    match_infos = get_df('Match_information')
+    match_stats = get_df('Match_Stats')
+    player_stats = get_df('Players_stats')
+    line_ups = get_df('Line-ups')
+    return match_infos, match_stats, player_stats, line_ups
