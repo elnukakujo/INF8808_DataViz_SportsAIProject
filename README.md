@@ -1,4 +1,4 @@
-### INF8808_DataViz_SportsAIProject
+# INF8808_DataViz_SportsAIProject
 
 ##Windows
 
