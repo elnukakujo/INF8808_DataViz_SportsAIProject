@@ -3,6 +3,7 @@ import dash_html_components as html
 import dash_core_components as dcc
 from dash import Input, Output
 import plotly.io as pio
+
 from get_df import load_data
 from Noe.preprocess import preprocess as noe_preprocess
 from Noe.make_viz import create_scatter, create_stacked_bars
@@ -31,10 +32,7 @@ df_amadeus = amadeus_preprocess(player_stats, line_ups)
 df_ibrahima = ibrahima_preprocess(player_stats)
 
 # Create initial figures
-fig1 = create_scatter(data)
-radar_fig = create_radar_chart(radar_data, 'Italy')
 fig4, fig5 = create_bars(df1, df2)
-fig9 = create_bar_chart(df_ibrahima)
 
 app.layout = html.Div([
     html.Div(className='intro', children=[
@@ -86,8 +84,15 @@ app.layout = html.Div([
                 html.P("Try hovering hover the elements in the graph and play with the legend to get more details!")
             ]),
             html.Div(className='viz-container', children=[
+                html.Label('Select a plot:'),
+                dcc.Dropdown(
+                    id='type-dropdown',
+                    options=[{'label': 'Total Score vs Fouls for Matches', 'value': 'scatter'},
+                            {'label': 'Goals Scored in Open Play vs Set Pieces', 'value': 'horizontal_bar'}],
+                    value='scatter',
+                    clearable=False
+                ),
                 dcc.Graph(
-                    figure=fig1,
                     className='graph',
                     id='scatter_horizontal_bar'
                 )
@@ -126,7 +131,7 @@ app.layout = html.Div([
             dcc.Graph(
                 id='radar1',
                 className='graph',
-                figure=radar_fig
+                figure=create_radar_chart(radar_data, 'Italy')
             )
         ])
     ]),
@@ -251,7 +256,7 @@ app.layout = html.Div([
             ),
             html.Div(className='viz-container', children=[
                 dcc.Graph(
-                    figure=fig9,
+                    figure=create_bar_chart(df_ibrahima),
                     className='graph',
                     id='tackles-bar'
                 )
@@ -296,6 +301,16 @@ def update_radar_chart(first_team, second_team):
         return create_radar_chart(radar_data, second_team)
     elif not second_team:
         return create_radar_chart(radar_data, first_team)
+
+@app.callback(
+    Output('scatter_horizontal_bar','figure'),
+    Input('type-dropdown', 'value')
+)
+def update_graph(selected_type):
+    if selected_type == 'scatter':
+        return create_scatter(data)
+    if selected_type == 'horizontal_bar':
+        return create_stacked_bars(data)
 
 @app.callback(
     Output('bar3', 'figure'),
