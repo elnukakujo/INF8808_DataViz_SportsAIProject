@@ -1,6 +1,6 @@
 # INF8808_DataViz_SportsAIProject
 
-##Windows
+## Windows
 
 In the project folder:
 
@@ -11,7 +11,7 @@ In the project folder:
     python server.py
     After, open the localhost:8050 in your browser
 
-##Linux
+## Linux
 
 In the project folder:
 
