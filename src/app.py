@@ -32,7 +32,6 @@ df_ibrahima = ibrahima_preprocess(player_stats)
 
 # Create initial figures
 fig1 = create_scatter(data)
-fig2 = create_stacked_bars(data)
 radar_fig = create_radar_chart(radar_data, 'Italy')
 fig4, fig5 = create_bars(df1, df2)
 fig6, fig7, fig8 = draw(df1_amadeus, df2_amadeus, df3_amadeus)
@@ -88,14 +87,6 @@ app.layout = html.Div([
                 html.P("Try hovering hover the elements in the graph and play with the legend to get more details!")
             ]),
             html.Div(className='viz-container', children=[
-                html.Label('Select a plot:'),
-                dcc.Dropdown(
-                    id='type-dropdown',
-                    options=[{'label': 'Total Score vs Fouls for Matches', 'value': 'scatter'},
-                            {'label': 'Goals Scored in Open Play vs Set Pieces', 'value': 'horizontal_bar'}],
-                    value='scatter',
-                    clearable=False
-                ),
                 dcc.Graph(
                     figure=fig1,
                     className='graph',
@@ -308,16 +299,6 @@ def update_radar_chart(first_team, second_team):
     if not second_team:
         radar_fig = create_radar_chart(radar_data, first_team)
         return radar_fig
-
-@app.callback(
-    Output('scatter_horizontal_bar','figure'),
-    Input('type-dropdown', 'value')
-)
-def update_graph(selected_type):
-    if selected_type == 'scatter':
-        return fig1
-    if selected_type == 'horizontal_bar':
-        return fig2
 
 @app.callback(
     Output('bar3', 'figure'),
