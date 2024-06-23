@@ -26,14 +26,16 @@ def create_bar_chart(labels, values, title):
     )
     return fig
 
-def draw(df1, df2, df3):
-    labels, values = prepare_bar_data(df1)
-    fig_contributions = create_bar_chart(labels, values, "Contributions by Role")
-    
-    labels, values = prepare_bar_data(df2)
-    fig_goals = create_bar_chart(labels, values, "Goals by Role")
-    
-    labels, values = prepare_bar_data(df3)
-    fig_assists = create_bar_chart(labels, values, "Assists by Role")
-    
-    return fig_contributions, fig_goals, fig_assists
+def draw(option,df):
+    if option=="contributions":
+        df=df.groupby("Role")["Total Contributions"].sum().sort_values(ascending=False)
+        labels, values = prepare_bar_data(df)
+        return create_bar_chart(labels, values, "Contributions by Role")
+    elif option=="goals":
+        df=df.groupby("Role")["Goals"].sum().sort_values(ascending=False)
+        labels, values = prepare_bar_data(df)
+        return create_bar_chart(labels, values, "Goals by Role")
+    elif option=="assists":
+        df=df.groupby("Role")["Assists"].sum().sort_values(ascending=False)
+        labels, values = prepare_bar_data(df)
+        return create_bar_chart(labels, values, "Assists by Role")

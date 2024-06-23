@@ -27,14 +27,13 @@ data = noe_preprocess(match_infos, match_stats)
 radar_data = arman_preprocess(match_stats)
 bubble_data = preprocess_data(match_infos, player_stats, line_ups)
 df1, df2 = abdel_preprocess(player_stats, line_ups)
-df1_amadeus, df2_amadeus, df3_amadeus = amadeus_preprocess(player_stats, line_ups)
+df_amadeus = amadeus_preprocess(player_stats, line_ups)
 df_ibrahima = ibrahima_preprocess(player_stats)
 
 # Create initial figures
 fig1 = create_scatter(data)
 radar_fig = create_radar_chart(radar_data, 'Italy')
 fig4, fig5 = create_bars(df1, df2)
-fig6, fig7, fig8 = draw(df1_amadeus, df2_amadeus, df3_amadeus)
 fig9 = create_bar_chart(df_ibrahima)
 
 app.layout = html.Div([
@@ -291,26 +290,19 @@ def update_radar_chart(first_team, second_team):
         radar_fig = create_radar_chart(radar_data, first_team)
         add_team_to_radar_chart(radar_fig, radar_data, second_team)
         return radar_fig
-    if not first_team and not second_team:
+    elif not first_team and not second_team:
         return create_empty_radar_chart()
-    if not first_team:
-        radar_fig = create_radar_chart(radar_data, second_team)
-        return radar_fig
-    if not second_team:
-        radar_fig = create_radar_chart(radar_data, first_team)
-        return radar_fig
+    elif not first_team:
+        return create_radar_chart(radar_data, second_team)
+    elif not second_team:
+        return create_radar_chart(radar_data, first_team)
 
 @app.callback(
     Output('bar3', 'figure'),
     Input('plot-selector', 'value')
 )
 def update_graph(selected_plot):
-    if selected_plot == 'contributions':
-        return fig6
-    elif selected_plot == 'goals':
-        return fig7
-    elif selected_plot == 'assists':
-        return fig8
+    return draw(selected_plot,df_amadeus)
 
 @app.callback(
 Output('player-dropdown', 'options'),
