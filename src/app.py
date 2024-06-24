@@ -165,7 +165,7 @@ app.layout = html.Div([
                 html.Label('Select a Statistic'), 
                 dcc.Dropdown(
                     id='stat-dropdown',
-                    options=[{'label': stat, 'value': stat} for stat in player_stats['StatsName'].unique()]
+                    options=[{'label': stat, 'value': stat} for stat in bubble_data['StatsName'].unique()]
                 ),
                 html.Div(id='output-container')
             ])
