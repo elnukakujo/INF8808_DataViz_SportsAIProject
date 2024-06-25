@@ -6,6 +6,9 @@ import plotly.io as pio
 
 
 def create_template():
+    '''
+        Defines the general font size and family for all our graphs 
+    '''
     # TODO : Define a theme as defined above
     pio.templates['mytemplate'] = go.layout.Template(
         layout=go.Layout(

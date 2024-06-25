@@ -4,8 +4,19 @@
 import plotly.graph_objects as go
 import Noe.hovertemplate as hover
 import numpy as np
+import pandas as pd
 
-def create_scatter(df):
+def create_scatter(df: pd.DataFrame)->go.Figure:
+    '''
+        Create a scatter plot with the total scores on the x-axis and the total fouls on the y-axis, with some jitter on the x axis, colors depending on the Round name
+        and an hovertemplate.
+        
+        Args:
+            df (pd.DataFrame): The dataframe with the Total Score and Total Fouls
+        
+        Returns:
+            The scatter plot figure
+    '''
     round_colors = {'Final Tournament': 'blue',
         'Eighth Finals': 'green',
         'Quarter Finals': 'orange',
@@ -54,7 +65,17 @@ def create_scatter(df):
     )
     return fig
 
-def create_stacked_bars(df):
+def create_stacked_bars(df: pd.DataFrame)->go.Figure:
+    '''
+        Create a horizontal stacked bar chart with the number of goals scored by open play and set pieces for each match ordered in decreasing order with the correct
+        hovertemplate.
+        
+        Args:
+            df (pd.DataFrame): The dataframe with the goals scored by open play and set pieces
+        
+        Returns:   
+            The horizontal stacked bar chart figure
+    '''    
     df['TotalGoals'] = df['GoalsOpenPlay'] + df['GoalsSetPieces']
     
     # Sort DataFrame by TotalGoals in descending order
