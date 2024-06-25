@@ -253,10 +253,41 @@ app.layout = html.Div([
         html.Div(className='content', children=[
             html.H3('Tackles'),
             html.P(
-                "The following bar chart shows the number of tackles made by each player in the tournament. " +
-                "Tackles are an important defensive metric that can help assess a player's ability to regain possession of the ball. " +
-                "The chart provides insights into the defensive contributions of each player and highlights the top performers in this category."
+                'This chart highlights key defensive players from various countries, showcasing their vital contributions. '+
+                'Notably, players like Kalvin Phillips (England), Stefan Lainer (Austria), Marco Verratti (Italy), and Toni Kroos (Germany) '+
+                'are at the top, emphasizing the importance of robust defensive midfielders and defenders.'
             ),
+            html.H4('Positions and Countries:'),
+            html.Ul([
+               html.Li(
+                   'Midfielders like Kalvin Phillips and Marco Verratti dominate the list, highlighting the critical role of midfielders '+
+                   'in breaking up play and regaining possession.'
+                   ),
+               html.Li(
+                   'Defenders such as Stefan Lainer and Simon Kjær also feature prominently, reflecting their defensive solidity.'
+                   )
+            ]),
+            html.H4('Tournament Performance:'),
+            html.Ul([
+               html.Li(
+                   "Italy's success, ultimately winning the tournament, is underscored by the presence of Marco Verratti. His high tackle count was "+
+                   "crucial in Italy's midfield dominance."
+                   ),
+               html.Li(
+                   "England's journey to the finals is mirrored in the performances of Kalvin Phillips and Declan Rice, both key in their defensive structure."
+                   )
+            ]),
+            html.H4('Correlation Between Aggression and Tournament Progress:'),
+            html.Ul([
+               html.Li(
+                   "Countries with players showing high tackle counts, such as Italy, England, and Denmark, generally progressed far in the tournament. "+
+                   "This suggests that aggressive and effective defensive play was a common factor among successful teams."
+                   ),
+               html.Li(
+                   "Teams like Austria and Switzerland, with notable defensive performances, reached the knockout stages, further reinforcing the link "+
+                   "between strong defensive contributions and tournament success."
+                   )
+            ]),
             html.Div(className='viz-container', children=[
                 dcc.Graph(
                     figure=create_bar_chart(df_ibrahima),
