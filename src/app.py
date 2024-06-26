@@ -126,7 +126,8 @@ app.layout = html.Div([
             html.Label('Select Second Team'),
             dcc.Dropdown(
                 id='second-team-dropdown',
-                options=[{'label': team, 'value': team} for team in radar_data['TeamName']]
+                options=[{'label': team, 'value': team} for team in radar_data['TeamName']],
+                value='England'
             ),
             dcc.Graph(
                 id='radar1',
@@ -153,16 +154,19 @@ app.layout = html.Div([
                 html.Label('Select a Country'), 
                 dcc.Dropdown(
                     id='country-dropdown',
-                    options=[{'label': country, 'value': country} for country in bubble_data['Country'].unique()]
+                    options=[{'label': country, 'value': country} for country in bubble_data['Country'].unique()],
+                    value='Italy'
                 ),
                 html.Label('Select a Player'), 
                 dcc.Dropdown(
-                    id='player-dropdown'
+                    id='player-dropdown',
+                    value='Lorenzo Insigne'
                 ),
                 html.Label('Select a Statistic'), 
                 dcc.Dropdown(
                     id='stat-dropdown',
-                    options=[{'label': stat, 'value': stat} for stat in bubble_data['StatsName'].unique()]
+                    options=[{'label': stat, 'value': stat} for stat in bubble_data['StatsName'].unique()],
+                    value='Goals'
                 ),
                 html.Div(id='output-container')
             ])
@@ -326,7 +330,7 @@ def update_figure(selected_country, selected_player, selected_stat):
         return html.Div("No data available.",
                         style={'color': 'red', 'font-size': '20px', 'text-align': 'center', 'margin-top': '20px'})
 
-    return create_figure(filtered_df)
+    return create_figure(filtered_df, selected_player, selected_stat)
 
 @app.callback(
 Output('player-dropdown', 'options'),

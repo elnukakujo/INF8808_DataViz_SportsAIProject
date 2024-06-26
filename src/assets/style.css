@@ -152,5 +152,5 @@ ol, li, ul{
 
 #radar_chart .viz-container, #peformance_metrics .viz-container, #foot_analysis .viz-container, 
 #stats_role .viz-container, #tackles_bar .viz-container {
-    width: 800px;
+    width: 1000px;
 }
