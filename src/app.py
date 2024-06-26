@@ -1,6 +1,6 @@
 import dash
-import dash_html_components as html
-import dash_core_components as dcc
+from dash import html
+from dash import dcc
 from dash import Input, Output
 import plotly.io as pio
 
@@ -56,7 +56,7 @@ app.layout = html.Div([
                 )
             ]),
             html.Div(className='img-container', children=[
-                html.Img(src='assets/img/aboutus.jpg', alt='A coach talking to her team'),
+                html.Img(src='assets/img/aboutus.jpg', alt='The Italian Team posing with the trophy after winning the Euro 2020'),
                 html.A('Image Source',
                     href='https://www.nbcnews.com/news/world/italy-wins-european-soccer-championship-3-2-penalty-shootout-n1273643',
                     target='_blank')
