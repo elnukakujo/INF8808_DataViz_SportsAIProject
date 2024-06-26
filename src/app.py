@@ -144,7 +144,7 @@ app.layout = html.Div([
                 ),
                 html.Ul([
                     html.Li("Each bubble represents the selected players performance for a match. The size of the bubble is proportional to the players' performance for the chosen statistic."),
-                    html.Li("The color of the bubble indicates the average z-scores of temperature and humidity for the match in question."),
+                    html.Li("The color of the bubble indicates the average z-scores of temperature and humidity for the match in question. Where the Z-score defines how many standard deviations a data point is from the mean, and is calculated using the formula: 𝑍 = 𝑋 − 𝜇 / 𝜎"),
                     html.Li("Should there be no data for a particular player, for the chosen statistic, 'No data available.' will be displayed. For example, if you look at yellow cards, and the player has none"),
                     html.Li("Hover over the bubbles to obtain more detailed information. The value for the chosen statistic, the oppponent for the match in question, etc."),
                 ]),
