@@ -7,7 +7,17 @@ def create_bar_chart(data):
     fig.update_layout(
         title={'text': "Top 15 Players by Tackles Won", 'x': 0.5, 'xanchor': 'center'},
         bargap=0.4, # This makes the bars thinner
-        plot_bgcolor='#DBE2EF', # Transparent background
-        paper_bgcolor='#F9F7F7', # Transparent background
+        legend=dict(
+            title=dict(
+                text="Player's Name"
+            )
+        ),
+        xaxis=dict(
+            title="Player's Name"
+        ),
+        yaxis=dict(
+            title='Tackles Won'
+        ),
+        dragmode=False
     )
     return fig

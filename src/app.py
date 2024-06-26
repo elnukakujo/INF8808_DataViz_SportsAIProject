@@ -30,15 +30,13 @@ match_infos, match_stats, player_stats, line_ups = load_data()
 data = noe_preprocess(match_infos, match_stats)
 radar_data = arman_preprocess(match_stats)
 bubble_data = preprocess_data(match_infos, player_stats, line_ups)
-df1, df2 = abdel_preprocess(player_stats, line_ups)
+df_metrics, df_foot = abdel_preprocess(player_stats, line_ups)
 df_amadeus = amadeus_preprocess(player_stats, line_ups)
 df_ibrahima = ibrahima_preprocess(player_stats)
 
-# Create initial figures
-fig4, fig5 = create_bars(df1, df2)
 
 app.layout = html.Div([
-    html.Div(className='intro', children=[
+    html.Div(className='section', id='intro', children=[
         html.H1('SportsAI'),
         html.H2('Boost your Players with Data'),
     ]),
@@ -114,8 +112,7 @@ app.layout = html.Div([
                     html.Li("Attempts Accuracy: Percentage of attempts on target."),
                     html.Li("Passes Accuracy: Percentage of successful passes."),
                     html.Li("Fouls Committed per Game: Average number of fouls committed per game. Note: This value is MinMax Scaled to [0,1] range."),
-                    html.Li(
-                        "Ball Possession % per Game: Average percentage of time the team has possession of the ball.")
+                    html.Li("Ball Possession % per Game: Average percentage of time the team has possession of the ball.")
                 ])
             ])
         ]),
@@ -188,8 +185,13 @@ app.layout = html.Div([
                 ),
             ]),
             html.Div(className='viz-container', children=[
+                html.Label('Select a Country'), 
+                dcc.Dropdown(
+                    id='country-dropdown2',
+                    options=[{'label': country, 'value': country} for country in df_metrics['Country'].unique()],
+                    value='Italy'
+                ),
                 dcc.Graph(
-                    figure=fig4,
                     className='graph',
                     id='bar1'
                 )
@@ -212,8 +214,13 @@ app.layout = html.Div([
                 ),
             ]),
             html.Div(className='viz-container', children=[
+                html.Label('Select a Country'), 
+                dcc.Dropdown(
+                    id='country-dropdown3',
+                    options=[{'label': country, 'value': country} for country in df_metrics['Country'].unique()],
+                    value='Italy'
+                ),
                 dcc.Graph(
-                    figure=fig5,
                     className='graph',
                     id='bar2'
                 )
@@ -270,6 +277,37 @@ app.layout = html.Div([
     ])
 ])
 
+# Callback for the match overview 
+@app.callback(
+    [Output('scatter_horizontal_bar','figure'),
+     Output('scatter_bar_container','style')],
+    Input('type-dropdown', 'value')
+)
+def update_graph(selected_type):
+    if selected_type == 'scatter':
+        return create_scatter(data), {'width': '700px', 'height': '600px'}
+    if selected_type == 'horizontal_bar':
+        return create_stacked_bars(data), {'width': '800px', 'height': '900px'}
+
+# Callback for the radar chart
+@app.callback(
+    Output('radar1', 'figure'),
+    Input('first-team-dropdown', 'value'),
+    Input('second-team-dropdown', 'value')
+)
+def update_radar_chart(first_team, second_team):
+    if first_team and second_team:
+        radar_fig = create_radar_chart(radar_data, first_team)
+        add_team_to_radar_chart(radar_fig, radar_data, second_team)
+        return radar_fig
+    elif not first_team and not second_team:
+        return create_empty_radar_chart()
+    elif not first_team:
+        return create_radar_chart(radar_data, second_team)
+    elif not second_team:
+        return create_radar_chart(radar_data, first_team)
+
+# Callbacks for the bubble chart
 @app.callback(
     Output('output-container', 'children'),
     [Input('country-dropdown', 'value'),
@@ -291,41 +329,6 @@ def update_figure(selected_country, selected_player, selected_stat):
     return create_figure(filtered_df)
 
 @app.callback(
-    Output('radar1', 'figure'),
-    Input('first-team-dropdown', 'value'),
-    Input('second-team-dropdown', 'value')
-)
-def update_radar_chart(first_team, second_team):
-    if first_team and second_team:
-        radar_fig = create_radar_chart(radar_data, first_team)
-        add_team_to_radar_chart(radar_fig, radar_data, second_team)
-        return radar_fig
-    elif not first_team and not second_team:
-        return create_empty_radar_chart()
-    elif not first_team:
-        return create_radar_chart(radar_data, second_team)
-    elif not second_team:
-        return create_radar_chart(radar_data, first_team)
-
-@app.callback(
-    [Output('scatter_horizontal_bar','figure'),
-     Output('scatter_bar_container','style')],
-    Input('type-dropdown', 'value')
-)
-def update_graph(selected_type):
-    if selected_type == 'scatter':
-        return create_scatter(data), {'width': '700px', 'height': '600px'}
-    if selected_type == 'horizontal_bar':
-        return create_stacked_bars(data), {'width': '800px', 'height': '900px'}
-
-@app.callback(
-    Output('bar3', 'figure'),
-    Input('plot-selector', 'value')
-)
-def update_graph(selected_plot):
-    return draw(selected_plot,df_amadeus)
-
-@app.callback(
 Output('player-dropdown', 'options'),
 Input('country-dropdown', 'value')
 )
@@ -334,5 +337,37 @@ def update_player_dropdown(selected_country):
         players = bubble_data[bubble_data['Country'] == selected_country]['FullName'].dropna().unique()
         return [{'label': player, 'value': player} for player in players]
     return []
+
+# Callback for Performance Metrics
+@app.callback(
+    Output('bar1', 'figure'),
+    Input('country-dropdown2', 'value')
+)
+def update_graph(selected_country):
+    return create_bars(
+        df_metrics, 
+        selected_country, 
+        f'The values of Recovered balls, Distance covered (km), Tackles won, and Fouls committed by player positions for {selected_country}'
+    )
+
+# Callback for Foot Analysis
+@app.callback(
+    Output('bar2', 'figure'),
+    Input('country-dropdown3', 'value')
+)
+def update_graph(selected_country):
+    return create_bars(
+        df_foot, 
+        selected_country, 
+        f'Number of Goals Scored by Left and Right Foot by Player Position for {selected_country}'
+    )
+
+# Callback for Player Stats by Role
+@app.callback(
+    Output('bar3', 'figure'),
+    Input('plot-selector', 'value')
+)
+def update_graph(selected_plot):
+    return draw(selected_plot,df_amadeus)
 
 server = app.server
