@@ -11,6 +11,11 @@ def prepare_bar_data(series):
     sorted_series = series.sort_values(ascending=True)
     labels = sorted_series.index
     values = sorted_series.values
+    # find index of goalkeepers in labels
+    gk_index = labels.get_loc("goalkeepers")
+    # drop goalkeepers from labels and values
+    labels = labels.drop("goalkeepers")
+    values = values[:gk_index].tolist() + values[gk_index+1:].tolist()
     return labels, values
 
 def create_bar_chart(labels, values, title):

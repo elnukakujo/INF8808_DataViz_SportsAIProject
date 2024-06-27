@@ -238,7 +238,8 @@ app.layout = html.Div([
                 html.P(
                      "The following visualizations provide insights into the performance of players based on their roles during the tournament."+
                      "These metrics are crucial for evaluating player contributions and identifying key performers."+
-                     "The visualizations include:"
+                     " Contributions are the goals and assists added."+
+                     " The visualizations include:"
                 ), 
             ]),
             html.Div(className='viz-container', children=[
